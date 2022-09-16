@@ -14,6 +14,9 @@ struct System {
         members.append(member)
     }
     
-    
-    
+    mutating func removeMember(_ email: String) {
+        members.removeAll { member in
+            member.email == email
+        }
+    }
 }

@@ -12,14 +12,24 @@ struct MainMenu {
     var system: System
     
     mutating func mainMenuActions() {
-        let action: Console.Actions = console.mainMenu()
-        switch action {
+        var run = true
+        while(run) {
+            let action: Console.Actions = console.mainMenu()
+        
+            switch action {
             case .addMember:
-                print("here")
-                system.addNewMember(console.createNewMember())
+                system.addNewMember(MemberView().createNewMember())
+                print(system.members)
+                
+            case .removeMemeber:
+                let email = MemberView().deleteUser()
+                system.removeMember(email)
+                print(system.members)
+                
             case .quit:
-                print("a")
+                run = false
             }
+        }
     }
     
 }
