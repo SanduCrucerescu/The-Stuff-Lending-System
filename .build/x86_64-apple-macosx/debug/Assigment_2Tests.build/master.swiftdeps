@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)"
+options: "effbaa09061ba0b8cbc79f2ebf32f0d577553126f700da48c2a93c2f12957d39"
+build_start_time: [1663335875, 643917083]
+build_end_time: [1663335895, 207157135]
+inputs:
+  "/Users/alex/Developer/OOAD/a2/Tests/Assigment 2Tests/Assigment_2Tests.swift": [1663335844, 79010963]

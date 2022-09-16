@@ -1,0 +1,11 @@
+version: "Apple Swift version 5.7 (swiftlang-5.7.0.127.4 clang-1400.0.29.50)"
+options: "d82ae00da2bd17f60a5609fabe447a86d60437d244af47c69e39e5df191b5516"
+build_start_time: [1663335863, 761412143]
+build_end_time: [1663335875, 58212041]
+inputs:
+  "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Assigment_2.swift": [1663332352, 814467430]
+  "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Controlles/MainMenu.swift": [1663332352, 814980030]
+  "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Controlles/System.swift": [1663332352, 815443992]
+  "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Models/Item.swift": [1663332352, 816071987]
+  "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Models/Member.swift": [1663332352, 816761016]
+  "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Views/Console.swift": [1663332352, 817468643]

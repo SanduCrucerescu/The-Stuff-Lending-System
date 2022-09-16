@@ -1,0 +1,11 @@
+{
+  "": {
+    "swift-dependencies": "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2Tests.build/master.swiftdeps"
+  },
+  "/Users/alex/Developer/OOAD/a2/Tests/Assigment 2Tests/Assigment_2Tests.swift": {
+    "dependencies": "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2Tests.build/Assigment_2Tests.d",
+    "object": "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2Tests.build/Assigment_2Tests.swift.o",
+    "swiftmodule": "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2Tests.build/Assigment_2Tests~partial.swiftmodule",
+    "swift-dependencies": "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2Tests.build/Assigment_2Tests.swiftdeps"
+  }
+}
