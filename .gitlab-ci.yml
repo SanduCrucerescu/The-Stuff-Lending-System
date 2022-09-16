@@ -1,5 +1,5 @@
 image: "swift:latest"
 
-test:
-  scrip:
+test:swift:
+  script:
     swift test
