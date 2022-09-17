@@ -9,6 +9,8 @@ import Foundation
 
 struct MemberView {
     
+    // MARK: - Getting the data for the user
+    
     func getMemerName() -> String {
         print("Enter name: ", terminator: "")
         let name = readLine() ?? ""
@@ -31,6 +33,23 @@ struct MemberView {
         return phoneNumber
     }
     
+    func reenterEmail() -> String {
+        print("-- Email already used --")
+        print("Please insert a new email: ", terminator: "")
+        let email = readLine() ?? ""
+        
+        return email
+    }
+    
+    func reenterPhoneNumber() -> String {
+        print("-- Phone Number is used --")
+        print("Insert a new phone number: ", terminator: "")
+        let phoneNumber = readLine() ?? ""
+        
+        return phoneNumber
+    }
+    
+    // MARK: - Creating the member
     
     func createNewMember() -> Member? {
         let name = getMemerName()
@@ -44,14 +63,10 @@ struct MemberView {
                 status = false
                 return newMember
             } catch MemberParseError.usedEmail {
-                print("-- Email already used --")
-                print("Please insert a new email: ", terminator: "")
-                email = readLine() ?? ""
+                email = reenterEmail()
                 status = true
             } catch MemberParseError.usedPhoneNumber {
-                print("-- Phone Number is used --")
-                print("Insert a new phone number: ", terminator: "")
-                phoneNumber = readLine() ?? ""
+                phoneNumber = reenterPhoneNumber()
                 status = true
             } catch {
                 print("Other Error")
