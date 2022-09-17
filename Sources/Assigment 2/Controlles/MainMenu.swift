@@ -7,19 +7,14 @@
 
 import Foundation
 
-struct MainMenu {
-    var console: Console
-    var system: System
+func mainMenuActions(console: Console, system: inout System) {
+    var run = true
+    while(run) {
+        let action: Console.Actions = console.mainMenu()
     
-    
-    mutating func mainMenuActions() {
-        var run = true
-        while(run) {
-            let action: Console.Actions = console.mainMenu()
-        
-            switch action {
+        switch action {
             case .addMember:
-                if let member = MemberView().createNewMember() {
+                if let member = MemberView().createNewMember(system.members) {
                     system.addNewMember(member)
                 }
             case .removeMemeber:
@@ -28,6 +23,8 @@ struct MainMenu {
             case .listMembers:
                 let member = system.listMembers()
                 MemberView().printMembers(member)
+            case .changeUser:
+                doChangeUser(system: &system)
             case .createItem:
                 let email = MemberView().getMember()
                 let category = ItemView().getCategory()
@@ -37,8 +34,7 @@ struct MainMenu {
                 system.createItem(email, item)
             case .quit:
                 run = false
-            }
         }
     }
-    
 }
+

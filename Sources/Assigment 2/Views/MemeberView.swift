@@ -7,7 +7,15 @@
 
 import Foundation
 
+
 struct MemberView {
+    
+    enum Actions {
+        case name
+        case email
+        case phoneNumber
+        case back
+    }
     
     // MARK: - Getting the data for the user
     
@@ -33,17 +41,22 @@ struct MemberView {
         return phoneNumber
     }
     
+    func reenterName() -> String {
+        print("Insert new name: ", terminator: "")
+        let email = readLine() ?? ""
+        
+        return email
+    }
+    
     func reenterEmail() -> String {
-        print("-- Email already used --")
-        print("Please insert a new email: ", terminator: "")
+        print("Insert new email: ", terminator: "")
         let email = readLine() ?? ""
         
         return email
     }
     
     func reenterPhoneNumber() -> String {
-        print("-- Phone Number is used --")
-        print("Insert a new phone number: ", terminator: "")
+        print("Insert new phone number: ", terminator: "")
         let phoneNumber = readLine() ?? ""
         
         return phoneNumber
@@ -51,7 +64,7 @@ struct MemberView {
     
     // MARK: - Creating the member
     
-    func createNewMember() -> Member? {
+    func createNewMember(_ members: Array<Member>) -> Member? {
         let name = getMemerName()
         var email = getMemerEmail()
         var phoneNumber = getMemberPhoneNumber()
@@ -59,13 +72,15 @@ struct MemberView {
         
         repeat {
             do {
-                let newMember = try Member(name: name, email: email, mobilePhone: phoneNumber, ownedItems: [Item](), credits: 0)
+                let newMember = try Member(name: name, email: email, mobilePhone: phoneNumber, ownedItems: [Item](), credits: 0, members: members)
                 status = false
                 return newMember
             } catch MemberParseError.usedEmail {
+                print("-- Email already used --")
                 email = reenterEmail()
                 status = true
             } catch MemberParseError.usedPhoneNumber {
+                print("-- Phone Number is used --")
                 phoneNumber = reenterPhoneNumber()
                 status = true
             } catch {
@@ -76,6 +91,8 @@ struct MemberView {
         
         return nil
     }
+    
+    // MARK: - Member actions
     
     func deleteUser() -> String {
         print("Insert email of the user to delete: ", terminator: "")
@@ -93,5 +110,24 @@ struct MemberView {
     
     func printMembers(_ member: String) {
         print(member)
+        readLine()
+    }
+    
+    func changeUserInformation() -> Actions {
+        print("\n1. Name")
+        print("2. Email")
+        print("3. Phone Number")
+        print("b. Back")
+        print("What do you want to change?: ", terminator: "")
+        let choice = readLine()
+       
+        if choice == "1" {
+            return Actions.name
+        } else if choice == "2" {
+            return Actions.email
+        } else if choice == "3" {
+            return Actions.phoneNumber
+        }
+        return Actions.back
     }
 }

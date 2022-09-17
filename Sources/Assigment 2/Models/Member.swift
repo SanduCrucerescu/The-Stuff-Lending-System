@@ -20,39 +20,38 @@ struct Member: Identifiable {
     private(set) var ownedItems: Array<Item?>
     private(set) var credits: Int
    
-    init(name: String, email: String, mobilePhone: String, ownedItems: Array<Item?>, credits: Int) throws {
+    init(name: String, email: String, mobilePhone: String, ownedItems: Array<Item?>, credits: Int, members: Array<Member>) throws {
         self.name = name
-        self.email = try Self.checkEmail(email)
-        self.mobilePhone = try Self.checkPhoneNumber(mobilePhone)
+        self.email = try Self.checkEmail(email, members)
+        self.mobilePhone = try Self.checkPhoneNumber(mobilePhone, members)
         self.ownedItems = ownedItems
         self.credits = credits
-    }
-    
-    func checkPhoneNumber() {
-        
     }
     
     mutating func addItem(_ item: Item) {
         ownedItems.append(item)
     }
     
+    var newName: String {
+        get { return name}
+        set { name = newValue }
+    }
+    
 }
 
 extension Member {
-    private static func checkEmail(_ email: String) throws -> String  {
-        let temail = "test"
-        
-        guard email != temail else {
+    private static func checkEmail(_ email: String, _ members: Array<Member>) throws -> String  {
+
+        guard !members.contains(where: {$0.email == email}) else {
             throw MemberParseError.usedEmail
         }
         
         return email
     }
     
-    private static func checkPhoneNumber(_ phoneNumber: String) throws -> String  {
-        let temail = "test"
-        
-        guard phoneNumber != temail else {
+    private static func checkPhoneNumber(_ phoneNumber: String, _ members: Array<Member>) throws -> String  {
+
+        guard !members.contains(where: {$0.mobilePhone == phoneNumber}) else {
             throw MemberParseError.usedPhoneNumber
         }
         

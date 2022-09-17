@@ -13,20 +13,23 @@ struct Console {
         case addMember
         case removeMemeber
         case listMembers
+        case changeUser
         case createItem
         case quit
     }
     
     func mainMenu() -> Actions {
-        print("\n The Stuff Lending System")
+        print("\n    The Stuff Lending System")
         print("add - Add new member")
         print("remove - Remove member")
+        print("change - Change a member's information ")
         print("list - List Members")
         print("create - Create Item for member")
         print("q - Quit")
-        print("Please select a function: ", terminator: "")
+        print("\nPlease select a function: ", terminator: "")
         
         let choice: String = readLine() ?? ""
+        print("\u{001B}[2J")
         
         if choice == "q" || choice == "Q" {
             return Actions.quit
@@ -36,7 +39,9 @@ struct Console {
             return Actions.removeMemeber
         } else if choice == "list" {
             return Actions.listMembers
-        } else if choice == "create" {
+        } else if choice == "change" {
+            return Actions.changeUser
+        }else if choice == "create" {
             return Actions.createItem
         }
         

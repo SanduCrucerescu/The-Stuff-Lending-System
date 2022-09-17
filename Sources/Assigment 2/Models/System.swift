@@ -11,6 +11,8 @@ struct System {
     private(set) var time: Date
     private(set) var members: [Member] = []
     
+    // MARK: - Member functions
+    
     mutating func addNewMember(_ member: Member) {
         members.append(member)
     }
@@ -27,19 +29,27 @@ struct System {
         }
         return "\n -- No Users Found --"
     }
+        
+    func getMember (_ email: String) -> Member {
+        members.first(where: {$0.email == email})!
+    }
+    
+   mutating func changeName(_ email: String, _ newName: String) {
+       print(members)
+        if let index = members.firstIndex(where: {$0.email == email}) {
+            members[index].newName = newName
+        }
+       print(members)
+    }
+    
+    // MARK: - Items functions
     
     mutating func createItem(_ email: String, _ item: Item) {
         let owner = getMember(email)
         
-        
-        
         if let index = members.firstIndex(where: {$0.id == owner.id}) {
             members[index].addItem(item)
         }
-    }
-    
-    func getMember (_ email: String) -> Member {
-        members.first(where: {$0.email == email})!
     }
     
     

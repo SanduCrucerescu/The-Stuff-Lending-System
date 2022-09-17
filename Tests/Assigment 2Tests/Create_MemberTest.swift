@@ -39,13 +39,15 @@ final class Create_Member: XCTestCase {
                                   email: "test",
                                   mobilePhone: "123456",
                                   ownedItems: [],
-                                  credits: 0)
+                                  credits: 0,
+                                  members: [])
             
             let john1 = try Member(name: "Allan",
                                   email: "test",
                                   mobilePhone: "123456",
                                   ownedItems: [],
-                                  credits: 0)
+                                  credits: 0,
+                                  members: [])
             
             XCTAssertEqual(john.name, "Allan")
             XCTAssertEqual(john.email, "test")
