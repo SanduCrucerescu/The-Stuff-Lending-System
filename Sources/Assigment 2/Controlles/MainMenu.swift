@@ -11,6 +11,7 @@ struct MainMenu {
     var console: Console
     var system: System
     
+    
     mutating func mainMenuActions() {
         var run = true
         while(run) {
@@ -18,14 +19,22 @@ struct MainMenu {
         
             switch action {
             case .addMember:
-                system.addNewMember(MemberView().createNewMember())
-                print(system.members)
-                
+                if let member = MemberView().createNewMember() {
+                    system.addNewMember(member)
+                }
             case .removeMemeber:
                 let email = MemberView().deleteUser()
                 system.removeMember(email)
-                print(system.members)
+            case .listMembers:
+                let member = system.listMembers()
+                MemberView().printMembers(member)
+            case .createItem:
+                let email = MemberView().getMember()
+                let category = ItemView().getCategory()
+                let item = ItemView().createNewItem(creationDate: system.time,
+                                                    category: category)
                 
+                system.createItem(email, item)
             case .quit:
                 run = false
             }

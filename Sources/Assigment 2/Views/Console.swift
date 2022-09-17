@@ -12,6 +12,8 @@ struct Console {
     enum Actions {
         case addMember
         case removeMemeber
+        case listMembers
+        case createItem
         case quit
     }
     
@@ -19,6 +21,8 @@ struct Console {
         print("\n The Stuff Lending System")
         print("add - Add new member")
         print("remove - Remove member")
+        print("list - List Members")
+        print("create - Create Item for member")
         print("q - Quit")
         print("Please select a function: ", terminator: "")
         
@@ -30,7 +34,12 @@ struct Console {
             return Actions.addMember
         } else if choice == "remove" {
             return Actions.removeMemeber
+        } else if choice == "list" {
+            return Actions.listMembers
+        } else if choice == "create" {
+            return Actions.createItem
         }
+        
         return Actions.quit
     }
 }
