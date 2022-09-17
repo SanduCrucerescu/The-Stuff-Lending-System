@@ -23,7 +23,7 @@ struct Member: Identifiable {
     init(name: String, email: String, mobilePhone: String, ownedItems: Array<Item?>, credits: Int) throws {
         self.name = name
         self.email = try Self.checkEmail(email)
-        self.mobilePhone = mobilePhone
+        self.mobilePhone = try Self.checkPhoneNumber(mobilePhone)
         self.ownedItems = ownedItems
         self.credits = credits
     }

@@ -58,6 +58,8 @@ struct MemberView {
                 return nil
             }
         } while (status)
+        
+        return nil
     }
     
     func deleteUser() -> String {
