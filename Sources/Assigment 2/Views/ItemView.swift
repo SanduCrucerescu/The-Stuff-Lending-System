@@ -8,28 +8,26 @@
 import Foundation
 
 struct ItemView {
-    
+
     func getCategory() -> Item.Category {
         print("Enter item category: ", terminator: "")
         let category = readLine() ?? ""
-        
         if category == "1" {
-            return Item.Category.Tool
+            return Item.Category.tool
         } else if category == "2" {
-            return Item.Category.Vehicle
+            return Item.Category.vehicle
         } else if category == "3" {
-            return Item.Category.Game
+            return Item.Category.game
         } else if category == "4" {
-            return Item.Category.Toy
+            return Item.Category.toy
         } else if category == "5" {
-            return Item.Category.Sport
+            return Item.Category.sport
         } else if category == "6" {
-            return Item.Category.Other
+            return Item.Category.other
         }
-        return Item.Category.Other
+        return Item.Category.other
     }
-    
-    
+
     func createNewItem(creationDate: Date, category: Item.Category) -> Item {
         print("Enter item name: ", terminator: "")
         let name = readLine() ?? ""
@@ -37,15 +35,11 @@ struct ItemView {
         let description = readLine() ?? ""
         print("Enter cost per day: ", terminator: "")
         let costPerDay = readLine() ?? ""
-        
+
         return Item(name: name,
                     description: description,
                     creationDate: creationDate,
                     category: category,
                     costPerDay: Int(costPerDay)!)
-
     }
-    
-    
-    
 }

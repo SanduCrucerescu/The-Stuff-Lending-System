@@ -10,12 +10,12 @@ import Foundation
 struct Item: Identifiable, Equatable {
 
     enum Category {
-        case Tool
-        case Vehicle
-        case Game
-        case Toy
-        case Sport
-        case Other
+        case tool
+        case vehicle
+        case game
+        case toy
+        case sport
+        case other
     }
 
     private(set) var id = UUID().uuidString

@@ -8,7 +8,6 @@
 import Foundation
 
 struct Console {
-    
     enum Actions {
         case addMember
         case removeMemeber
@@ -16,8 +15,8 @@ struct Console {
         case changeUser
         case createItem
         case quit
-    }
-    
+    } //
+
     func mainMenu() -> Actions {
         print("\n    The Stuff Lending System")
         print("add - Add new member")
@@ -26,11 +25,11 @@ struct Console {
         print("list - List Members")
         print("create - Create Item for member")
         print("q - Quit")
-        print("\nPlease select a function: ", terminator: "")
-        
+        print("\nPlease select a function: ", terminator: "") //
+
         let choice: String = readLine() ?? ""
-        print("\u{001B}[2J")
-        
+        print("\u{001B}[2J") //
+
         if choice == "q" || choice == "Q" {
             return Actions.quit
         } else if choice == "add" {
@@ -41,10 +40,9 @@ struct Console {
             return Actions.listMembers
         } else if choice == "change" {
             return Actions.changeUser
-        }else if choice == "create" {
+        } else if choice == "create" {
             return Actions.createItem
         }
-        
         return Actions.quit
     }
 }
