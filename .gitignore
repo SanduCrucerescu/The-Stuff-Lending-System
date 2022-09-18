@@ -3,7 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=intellij,macos,windows,linux,eclipse,visualstudiocode
 
 # No build directory
-build/*
+.build/*
 
 # No gradle hidden stuff
 .gradle/*
