@@ -24,38 +24,21 @@ struct System {
         }
     }
 
-    func listMembers() -> [Member] {
-//        var membersTable = [Member]()
-//
-//        for member in members {
-//        }
-
-
-
-        //for member in members {
-//            return """
-//                 Name: \(member.name) \
-//                 Email: \(member.email) \
-//                 Mobile Phone Number: \(member.mobilePhone) \
-//                 Credits: \(member.credits)
-//                 \nOwned Items: \(member.ownedItems)
-//                 """
-        //}
-        //return "\n -- No Users Found --"
-        return members
-    }
-
     func getMember (_ email: String) -> Member {
         members.first(where: {$0.email == email})!
     }
 
-   mutating func changeName(_ email: String, _ newName: String) {
-       print(members)
+    mutating func changeName(_ email: String, _ newName: String) {
         if let index = members.firstIndex(where: {$0.email == email}) {
             members[index].newName = newName
         }
-       print(members)
     }
+
+    mutating func changeEmail(_ email: String, _ newEmail: String) {
+
+    }
+
+
 
     // MARK: - Items functions
 
