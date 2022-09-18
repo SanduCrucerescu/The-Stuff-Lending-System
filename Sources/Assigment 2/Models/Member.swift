@@ -11,6 +11,7 @@ import SwiftyTextTable
 enum MemberParseError: Error {
     case usedEmail
     case usedPhoneNumber
+    case userDoesntExist
 }
 
 struct Member: Identifiable {
@@ -40,6 +41,16 @@ struct Member: Identifiable {
     var newName: String {
         get { return name }
         set { name = newValue }
+    }
+
+    var newEmail: String {
+        get { return email }
+        set { email = newValue }
+    }
+
+    var newPhoneNumber: String {
+        get { return mobilePhone }
+        set { mobilePhone = newValue }
     }
 }
 

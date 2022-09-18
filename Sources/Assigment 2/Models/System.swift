@@ -28,6 +28,10 @@ struct System {
         members.first(where: {$0.email == email})!
     }
 
+    func checkUser (_ email: String) -> Bool {
+        members.contains(where: {$0.email == email})
+    }
+
     mutating func changeName(_ email: String, _ newName: String) {
         if let index = members.firstIndex(where: {$0.email == email}) {
             members[index].newName = newName
@@ -35,10 +39,16 @@ struct System {
     }
 
     mutating func changeEmail(_ email: String, _ newEmail: String) {
-
+        if let index = members.firstIndex(where: {$0.email == email}) {
+            members[index].newEmail = newEmail
+        }
     }
 
-
+    mutating func changePhoneNumber(_ email: String, _ newPhoneNumber: String) {
+        if let index = members.firstIndex(where: {$0.email == email}) {
+            members[index].newPhoneNumber = newPhoneNumber
+        }
+    }
 
     // MARK: - Items functions
 

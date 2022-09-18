@@ -54,6 +54,12 @@ struct MemberView {
         return phoneNumber
     }
 
+    func memberDosentExist() -> String {
+        print("-- Member dosent exists | q - to exit --")
+        let value = readLine() ?? ""
+        return value
+    }
+
     // MARK: - Creating the member
 
     func createNewMember(_ members: [Member]) -> Member? {

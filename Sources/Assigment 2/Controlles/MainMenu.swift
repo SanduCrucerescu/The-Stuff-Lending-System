@@ -9,6 +9,7 @@ import Foundation
 
 func mainMenuActions(console: Console, system: inout System) {
     var run = true
+
     while run {
         let action: Console.Actions = console.mainMenu()
 
@@ -23,7 +24,7 @@ func mainMenuActions(console: Console, system: inout System) {
         case .listMembers:
             MemberView().printMembers(system.members)
         case .changeUser:
-            doChangeUser(system: &system)
+            changeUser(system: &system)
         case .createItem:
             let email = MemberView().getMember()
             let category = ItemView().getCategory()
@@ -34,4 +35,25 @@ func mainMenuActions(console: Console, system: inout System) {
             run = false
         }
     }
+}
+
+func changeUser(system: inout System) {
+    var memberExists = true
+    var value = ""
+
+    repeat {
+        do {
+            value = MemberView().getMemerEmail()
+            try doChangeUser(system: &system, value)
+            memberExists = false
+        } catch MemberParseError.userDoesntExist {
+            value = MemberView().memberDosentExist()
+            if value == "q"{
+                memberExists = false
+            } else {
+                memberExists = true
+            }
+        } catch {
+        }
+    } while memberExists
 }
