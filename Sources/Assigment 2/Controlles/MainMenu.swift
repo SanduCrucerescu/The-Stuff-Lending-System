@@ -43,11 +43,9 @@ func remove(system: inout System, email: String) throws {
     }
 }
 
-
-func checkEmailTemplate(system: inout System, function: (inout System, String) throws -> ()) {
+func checkEmailTemplate(system: inout System, function: (inout System, String) throws -> Void) {
     var memberExists = true
     var value = MemberView().getMemerEmail()
-
 
     repeat {
         do {
@@ -69,8 +67,6 @@ func checkEmailTemplate(system: inout System, function: (inout System, String) t
         }
     } while memberExists
 }
-
-
 
 func listMember(system: inout System) {
     let memberEmail = MemberView().getMemerEmail()

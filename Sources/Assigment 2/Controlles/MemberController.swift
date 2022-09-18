@@ -19,7 +19,6 @@ func doChangeUser(system: inout System, _ email: String) throws {
     case .name:
         let name = MemberView().reenterName()
         system.changeName(email, name)
-        break
     case .email:
         let email = MemberView().reenterEmail()
         system.changeEmail(email, email)
