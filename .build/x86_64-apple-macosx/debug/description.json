@@ -1,0 +1,237 @@
+{
+  "builtTestProducts" : [
+    {
+      "binaryPath" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment 2PackageTests.xctest/Contents/MacOS/Assigment 2PackageTests",
+      "productName" : "Assigment 2PackageTests"
+    }
+  ],
+  "copyCommands" : {
+
+  },
+  "pluginDescriptions" : [
+
+  ],
+  "swiftCommands" : {
+    "C.Assigment 2-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "importPath" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Assigment2.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Controlles/MainMenu.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Controlles/MemberController.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Models/Item.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Models/Member.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Models/System.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Views/Console.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Views/ItemView.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Views/MemeberView.swift"
+        }
+      ],
+      "isLibrary" : false,
+      "moduleName" : "Assigment_2",
+      "moduleOutputPath" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.swiftmodule",
+      "objects" : [
+        "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.build/Assigment2.swift.o",
+        "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.build/Controlles/MainMenu.swift.o",
+        "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.build/Controlles/MemberController.swift.o",
+        "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.build/Models/Item.swift.o",
+        "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.build/Models/Member.swift.o",
+        "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.build/Models/System.swift.o",
+        "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.build/Views/Console.swift.o",
+        "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.build/Views/ItemView.swift.o",
+        "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.build/Views/MemeberView.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "x86_64-apple-macosx10.13",
+        "-swift-version",
+        "5",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-g",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-Xfrontend",
+        "-entry-point-function-name",
+        "-Xfrontend",
+        "Assigment_2_main",
+        "-color-diagnostics",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib"
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.build/Assigment2.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.build/Controlles/MainMenu.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.build/Controlles/MemberController.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.build/Models/Item.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.build/Models/Member.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.build/Models/System.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.build/Views/Console.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.build/Views/ItemView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.build/Views/MemeberView.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.swiftmodule"
+        }
+      ],
+      "sources" : [
+        "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Assigment2.swift",
+        "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Controlles/MainMenu.swift",
+        "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Controlles/MemberController.swift",
+        "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Models/Item.swift",
+        "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Models/Member.swift",
+        "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Models/System.swift",
+        "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Views/Console.swift",
+        "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Views/ItemView.swift",
+        "/Users/alex/Developer/OOAD/a2/Sources/Assigment 2/Views/MemeberView.swift"
+      ],
+      "tempsPath" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2.build",
+      "wholeModuleOptimization" : false
+    },
+    "C.Assigment 2Tests-debug.module" : {
+      "executable" : "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+      "importPath" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug",
+      "inputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/Tests/Assigment 2Tests/Assigment_2Tests.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/Tests/Assigment 2Tests/Create_MemberTest.swift"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment 2"
+        }
+      ],
+      "isLibrary" : true,
+      "moduleName" : "Assigment_2Tests",
+      "moduleOutputPath" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2Tests.swiftmodule",
+      "objects" : [
+        "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2Tests.build/Assigment_2Tests.swift.o",
+        "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2Tests.build/Create_MemberTest.swift.o"
+      ],
+      "otherArguments" : [
+        "-target",
+        "x86_64-apple-macosx11.0",
+        "-swift-version",
+        "5",
+        "-enable-batch-mode",
+        "-index-store-path",
+        "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/index/store",
+        "-Onone",
+        "-enable-testing",
+        "-g",
+        "-j8",
+        "-DSWIFT_PACKAGE",
+        "-DDEBUG",
+        "-module-cache-path",
+        "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/ModuleCache",
+        "-parseable-output",
+        "-parse-as-library",
+        "-color-diagnostics",
+        "-sdk",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk",
+        "-F",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/Library/Frameworks",
+        "-I",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib",
+        "-L",
+        "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib"
+      ],
+      "outputs" : [
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2Tests.build/Assigment_2Tests.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2Tests.build/Create_MemberTest.swift.o"
+        },
+        {
+          "kind" : "file",
+          "name" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2Tests.swiftmodule"
+        }
+      ],
+      "sources" : [
+        "/Users/alex/Developer/OOAD/a2/Tests/Assigment 2Tests/Assigment_2Tests.swift",
+        "/Users/alex/Developer/OOAD/a2/Tests/Assigment 2Tests/Create_MemberTest.swift"
+      ],
+      "tempsPath" : "/Users/alex/Developer/OOAD/a2/.build/x86_64-apple-macosx/debug/Assigment_2Tests.build",
+      "wholeModuleOptimization" : false
+    }
+  },
+  "swiftFrontendCommands" : {
+
+  },
+  "testDiscoveryCommands" : {
+
+  }
+}

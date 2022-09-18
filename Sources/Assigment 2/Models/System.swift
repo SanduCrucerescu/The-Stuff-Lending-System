@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyTextTable
 
 struct System {
     private(set) var time: Date
@@ -23,16 +24,25 @@ struct System {
         }
     }
 
-    func listMembers() -> String {
-        for member in members {
-            return """
-                 Name: \(member.name)
-                        Email: \(member.email)
-                      Mobile Phone Number: \(member.mobilePhone)
-                            \nOwned Items: \(member.ownedItems)
-                 """
-        }
-        return "\n -- No Users Found --"
+    func listMembers() -> [Member] {
+//        var membersTable = [Member]()
+//
+//        for member in members {
+//        }
+
+
+
+        //for member in members {
+//            return """
+//                 Name: \(member.name) \
+//                 Email: \(member.email) \
+//                 Mobile Phone Number: \(member.mobilePhone) \
+//                 Credits: \(member.credits)
+//                 \nOwned Items: \(member.ownedItems)
+//                 """
+        //}
+        //return "\n -- No Users Found --"
+        return members
     }
 
     func getMember (_ email: String) -> Member {

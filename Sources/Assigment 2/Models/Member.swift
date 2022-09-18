@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyTextTable
 
 enum MemberParseError: Error {
     case usedEmail
@@ -56,4 +57,15 @@ extension Member {
         }
         return phoneNumber
     }
+}
+
+extension Member: TextTableRepresentable {
+    static var columnHeaders: [String] {
+        ["Name", "Email", "Phone Number", "Credits", "Owned Items"]
+    }
+
+    var tableValues: [CustomStringConvertible] {
+        [name, email, mobilePhone, credits, ownedItems.count]
+    }
+
 }

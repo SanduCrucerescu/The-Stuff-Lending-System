@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyTextTable
 
 struct MemberView {
     enum Actions {
@@ -100,8 +101,8 @@ struct MemberView {
         return email
     }
 
-    func printMembers(_ member: String) {
-        print(member)
+    func printMembers(_ members: [Member] ) {
+        print(members.renderTextTable())
         readLine()
     }
 

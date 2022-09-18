@@ -21,8 +21,8 @@ func mainMenuActions(console: Console, system: inout System) {
             let email = MemberView().deleteUser()
             system.removeMember(email)
         case .listMembers:
-            let member = system.listMembers()
-            MemberView().printMembers(member)
+            let member = try? system.listMembers()
+            MemberView().printMembers(member!)
         case .changeUser:
             doChangeUser(system: &system)
         case .createItem:
