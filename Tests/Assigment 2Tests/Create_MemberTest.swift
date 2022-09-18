@@ -73,9 +73,9 @@ final class CreateMember: XCTestCase {
 
             self.system.addNewMember(turing2)
 
-            let allanTest = self.system.checkMemberExists(allan.email)
-            let turingTest = self.system.checkMemberExists(turing.email)
-            let turing2Test = self.system.checkMemberExists(turing2.email)
+            let allanTest = try? self.system.checkMemberExists(allan.email)
+            let turingTest = try? self.system.checkMemberExists(turing.email)
+            let turing2Test = try? self.system.checkMemberExists(turing2.email)
 
             XCTAssertEqual(allanTest, true)
             XCTAssertEqual(turingTest, false)

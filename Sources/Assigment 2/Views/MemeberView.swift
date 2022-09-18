@@ -96,7 +96,7 @@ struct MemberView {
     // MARK: - Member actions
 
     func deleteUser() -> String {
-        print("Insert email of the user to delete: ", terminator: "")
+        print("Insert email of the user to delete | q - to exit: ", terminator: "")
         let email = readLine() ?? ""
         return email
     }
@@ -107,8 +107,13 @@ struct MemberView {
         return email
     }
 
-    func printMembers(_ members: [Member] ) {
+    func listMembers(_ members: [Member] ) {
         print(members.renderTextTable())
+        readLine()
+    }
+
+    func listMember(_ member: [Member]) {
+        print(member.renderTextTable())
         readLine()
     }
 

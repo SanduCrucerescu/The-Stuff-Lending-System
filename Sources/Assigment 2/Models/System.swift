@@ -25,11 +25,14 @@ struct System {
     }
 
     func getMember (_ email: String) -> Member {
-        members.first(where: {$0.email == email})!
+        members.first(where: {$0.email == email})! // TODO: fix this error
     }
 
-    func checkMemberExists (_ email: String) -> Bool {
-        members.contains(where: {$0.email == email})
+    func checkMemberExists (_ email: String) throws -> Bool {
+        guard members.contains(where: {$0.email == email}) else {
+            throw MemberParseError.userDoesntExist
+        }
+        return true
     }
 
     mutating func changeName(_ email: String, _ newName: String) {
