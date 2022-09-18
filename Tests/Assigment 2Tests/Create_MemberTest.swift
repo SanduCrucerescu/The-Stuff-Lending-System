@@ -32,26 +32,54 @@ final class CreateMember: XCTestCase {
 //            // Put the code you want to measure the time of here.
 //        }
 //    }
-    func test_createMember() {
+    var system =  System(time: Date())
+
+    func test_CreateMember() {
+        let john = try? Member(name: "Allan",
+                              email: "allan@enigma.com",
+                              mobilePhone: "123456",
+                              ownedItems: [],
+                              credits: 0,
+                              members: [])
+
+        XCTAssertEqual(john?.id.count, 6)
+    }
+
+    func test_createMemberDuplicate() {
         do {
-            let john = try Member(name: "Allan",
-                                  email: "test",
+            let allan = try Member(name: "Allan",
+                                  email: "allan@enigma.com",
                                   mobilePhone: "123456",
                                   ownedItems: [],
                                   credits: 0,
-                                  members: [])
+                                  members: self.system.members)
+            self.system.addNewMember(allan)
 
-            let john1 = try Member(name: "Allan",
-                                  email: "test",
-                                  mobilePhone: "123456",
+            let turing = try Member(name: "Turing",
+                                  email: "allan@enigma.com",
+                                  mobilePhone: "123",
                                   ownedItems: [],
                                   credits: 0,
-                                  members: [])
+                                  members: self.system.members)
 
-            XCTAssertEqual(john.name, "Allan")
-            XCTAssertEqual(john.email, "test")
-            XCTAssertEqual(john.mobilePhone, "123456")
-            XCTAssertEqual(john.ownedItems, [])
+            self.system.addNewMember(turing)
+
+            let turing2 = try  Member(name: "Turing",
+                                      email: "allan@enigma.com",
+                                      mobilePhone: "123456",
+                                      ownedItems: [],
+                                      credits: 0,
+                                      members: self.system.members)
+
+            self.system.addNewMember(turing2)
+
+            let allanTest = self.system.checkMemberExists(allan.email)
+            let turingTest = self.system.checkMemberExists(turing.email)
+            let turing2Test = self.system.checkMemberExists(turing2.email)
+
+            XCTAssertEqual(allanTest, true)
+            XCTAssertEqual(turingTest, false)
+            XCTAssertEqual(turing2Test, false)
         } catch {
         }
     }

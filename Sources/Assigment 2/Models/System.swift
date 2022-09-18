@@ -28,7 +28,7 @@ struct System {
         members.first(where: {$0.email == email})!
     }
 
-    func checkUser (_ email: String) -> Bool {
+    func checkMemberExists (_ email: String) -> Bool {
         members.contains(where: {$0.email == email})
     }
 

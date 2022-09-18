@@ -8,7 +8,7 @@
 import Foundation
 
 func doChangeUser(system: inout System, _ email: String) throws {
-    let userExists = system.checkUser(email)
+    let userExists = system.checkMemberExists(email)
 
     guard userExists != false else {
         throw MemberParseError.userDoesntExist
