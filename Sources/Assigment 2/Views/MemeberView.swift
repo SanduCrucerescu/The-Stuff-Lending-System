@@ -55,7 +55,7 @@ struct MemberView {
     }
 
     func memberDosentExist() -> String {
-        print("-- Member dosent exists | q - to exit --")
+        print("Insert member email | q - to exit: ", terminator: "")
         let value = readLine() ?? ""
         return value
     }

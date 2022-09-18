@@ -19,13 +19,13 @@ func mainMenuActions(console: Console, system: inout System) {
                 system.addNewMember(member)
             }
         case .removeMemeber:
-            removeMember(system: &system)
+            checkEmailTemplate(system: &system, function: remove)
         case .listMembers:
             MemberView().listMembers(system.members)
         case .listMember:
             listMember(system: &system)
         case .changeMember:
-            changeUser(system: &system)
+            checkEmailTemplate(system: &system, function: doChangeUser)
         case .createItem:
             createItem(system: &system)
         case .quit:
@@ -34,20 +34,29 @@ func mainMenuActions(console: Console, system: inout System) {
     }
 }
 
-func changeUser(system: inout System) {
+func remove(system: inout System, email: String) throws {
+    do {
+        try system.checkMemberExists(email)
+        system.removeMember(email)
+    } catch {
+        throw MemberParseError.userDoesntExist
+    }
+}
+
+
+func checkEmailTemplate(system: inout System, function: (inout System, String) throws -> ()) {
     var memberExists = true
-    var value = ""
+    var value = MemberView().getMemerEmail()
+
 
     repeat {
         do {
-            value = MemberView().getMemerEmail()
-
             guard value != "q" else {
                 memberExists = false
                 return
             }
 
-            try doChangeUser(system: &system, value)
+            try function(&system, value)
             memberExists = false
         } catch MemberParseError.userDoesntExist {
             value = MemberView().memberDosentExist()
@@ -59,62 +68,6 @@ func changeUser(system: inout System) {
         } catch {
         }
     } while memberExists
-}
-
-//func removeMember(system: inout System) {
-//    var memberExists = true
-//    var value = ""
-//
-//    while memberExists {
-//        do {
-//            value = MemberView().deleteUser()
-//
-//            guard value != "q" else {
-//                memberExists = false
-//                return
-//            }
-//
-//            try system.checkMemberExists(value)
-//            system.removeMember(value)
-//            memberExists = false
-//        } catch MemberParseError.userDoesntExist {
-//            value = MemberView().deleteUser()
-//            if value == "q"{
-//                memberExists = false
-//            } else {
-//                memberExists = true
-//            }
-//        } catch {
-//        }
-//    }
-//}
-
-func teamplate(system: inout System, mainFunc: (System, String?), secFunc: (String)?) {
-    var memberExists = true
-    var value = ""
-
-    while memberExists {
-        do {
-            value = MemberView().deleteUser()
-
-            guard value != "q" else {
-                memberExists = false
-                return
-            }
-
-            try system.checkMemberExists(value)
-            system.removeMember(value)
-            memberExists = false
-        } catch MemberParseError.userDoesntExist {
-            value = MemberView().deleteUser()
-            if value == "q"{
-                memberExists = false
-            } else {
-                memberExists = true
-            }
-        } catch {
-        }
-    }
 }
 
 

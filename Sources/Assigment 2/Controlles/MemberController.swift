@@ -13,21 +13,20 @@ func doChangeUser(system: inout System, _ email: String) throws {
     guard userExists != false else {
         throw MemberParseError.userDoesntExist
     }
-    var choice = MemberView().changeUserInformation()
 
-    while choice != MemberView.Actions.back {
-        switch choice {
-        case .name:
-            let name = MemberView().reenterName()
-            system.changeName(email, name)
-        case .email:
-            let email = MemberView().reenterEmail()
-            system.changeEmail(email, email)
-        case .phoneNumber:
-            let phoneNumber = MemberView().reenterPhoneNumber()
-            system.changePhoneNumber(email, phoneNumber)
-        case .back:
-            choice = MemberView.Actions.back
-        }
+    var choice = MemberView().changeUserInformation()
+    switch choice {
+    case .name:
+        let name = MemberView().reenterName()
+        system.changeName(email, name)
+        break
+    case .email:
+        let email = MemberView().reenterEmail()
+        system.changeEmail(email, email)
+    case .phoneNumber:
+        let phoneNumber = MemberView().reenterPhoneNumber()
+        system.changePhoneNumber(email, phoneNumber)
+    case .back:
+        choice = MemberView.Actions.back
     }
 }
