@@ -23,11 +23,11 @@ func mainMenuActions(console: Console, system: inout System) {
         case .listMembers:
             MemberView().listMembers(system.members)
         case .listMember:
-            listMember(system: &system)
+            checkEmailTemplate(system: &system, function: listMember)
         case .changeMember:
             checkEmailTemplate(system: &system, function: doChangeUser)
         case .createItem:
-            createItem(system: &system)
+            checkEmailTemplate(system: &system, function: createItem)
         case .quit:
             run = false
         }
@@ -68,17 +68,24 @@ func checkEmailTemplate(system: inout System, function: (inout System, String) t
     } while memberExists
 }
 
-func listMember(system: inout System) {
-    let memberEmail = MemberView().getMemerEmail()
-    let member = system.getMember(memberEmail)
-    let memberTable = [member]
-    MemberView().listMember(memberTable)
+func listMember(system: inout System, email: String) throws {
+    do {
+        let member = try system.getMember(email)
+        let memberTable = [member]
+        MemberView().listMember(memberTable)
+    } catch {
+        throw MemberParseError.userDoesntExist
+    }
 }
 
-func createItem(system: inout System) {
-    let email = MemberView().getMember()
-    let category = ItemView().getCategory()
-    let item = ItemView().createNewItem(creationDate: system.time,
-                                        category: category)
-    system.createItem(email, item)
+func createItem(system: inout System, email: String) throws {
+    do {
+        let owner = try system.getMember(email)
+        let category = ItemView().getCategory()
+        let item = ItemView().createNewItem(creationDate: system.time,
+                                            category: category)
+        system.createItem(owner, item)
+    } catch {
+        throw MemberParseError.userDoesntExist
+    }
 }

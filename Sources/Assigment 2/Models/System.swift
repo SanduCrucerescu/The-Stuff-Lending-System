@@ -24,8 +24,14 @@ struct System {
         }
     }
 
-    func getMember (_ email: String) -> Member {
-        members.first(where: {$0.email == email})! // TODO: fix this error
+    func getMember (_ email: String) throws -> Member {
+        let member = members.first(where: {$0.email == email})
+
+        guard member != nil else {
+            throw MemberParseError.userDoesntExist
+        }
+
+        return member!
     }
 
     func checkMemberExists (_ email: String) throws -> Bool {
@@ -55,8 +61,7 @@ struct System {
 
     // MARK: - Items functions
 
-    mutating func createItem(_ email: String, _ item: Item) {
-        let owner = getMember(email)
+    mutating func createItem(_ owner: Member, _ item: Item) {
         if let index = members.firstIndex(where: {$0.id == owner.id}) {
             members[index].addItem(item)
         }
