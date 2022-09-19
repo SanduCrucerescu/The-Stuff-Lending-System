@@ -4,6 +4,7 @@
 
 # No build directory
 .build/*
+.github/*
 
 # No gradle hidden stuff
 .gradle/*
