@@ -9,6 +9,13 @@ import Foundation
 
 struct ItemView {
 
+    enum Actions {
+        case name
+        case description
+        case category
+        case costPerDay
+    }
+
     func getCategory() -> Item.Category {
         print("Enter item category: ", terminator: "")
         let category = readLine() ?? ""
@@ -28,6 +35,8 @@ struct ItemView {
         return Item.Category.other
     }
 
+    // MARK: - Get item Data
+
     func createNewItem(creationDate: Date, category: Item.Category) -> Item {
         print("Enter item name: ", terminator: "")
         let name = readLine() ?? ""
@@ -41,5 +50,19 @@ struct ItemView {
                     creationDate: creationDate,
                     category: category,
                     costPerDay: Int(costPerDay)!)
+    }
+
+    func getItemID() -> String {
+        print("Enter item ID | q - exit: ", terminator: "")
+        let itemID = readLine() ?? ""
+        return itemID
+    }
+
+    // MARK: - Items actions
+
+    func deleteItem() {
+    }
+
+    func changeItemInformation() {
     }
 }

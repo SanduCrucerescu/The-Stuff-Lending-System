@@ -64,6 +64,11 @@ struct System {
     mutating func createItem(_ owner: Member, _ item: Item) {
         if let index = members.firstIndex(where: {$0.id == owner.id}) {
             members[index].addItem(item)
+            members[index].newCredits = members[index].newCredits + 100
         }
+    }
+
+    func checkItemExists(_ owner: Member, _ itemID: String) {
+//        if let memberIndex = members.
     }
 }

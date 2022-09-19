@@ -29,3 +29,47 @@ func doChangeUser(system: inout System, _ email: String) throws {
         choice = MemberView.Actions.back
     }
 }
+
+func checkEmailTemplate(system: inout System, function: (inout System, String) throws -> Void) {
+    var memberExists = true
+    var value = MemberView().getMemerEmail()
+
+    repeat {
+        do {
+            guard value != "q" else {
+                memberExists = false
+                return
+            }
+
+            try function(&system, value)
+            memberExists = false
+        } catch MemberParseError.userDoesntExist {
+            value = MemberView().memberDosentExist()
+            if value == "q"{
+                memberExists = false
+            } else {
+                memberExists = true
+            }
+        } catch {
+        }
+    } while memberExists
+}
+
+func removeMember(system: inout System, email: String) throws {
+    do {
+        _ = try system.checkMemberExists(email)
+        system.removeMember(email)
+    } catch {
+        throw MemberParseError.userDoesntExist
+    }
+}
+
+func listMember(system: inout System, email: String) throws {
+    do {
+        let member = try system.getMember(email)
+        let memberTable = [member]
+        MemberView().listMember(memberTable)
+    } catch {
+        throw MemberParseError.userDoesntExist
+    }
+}

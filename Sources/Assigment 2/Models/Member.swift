@@ -52,6 +52,11 @@ struct Member: Identifiable {
         get { return mobilePhone }
         set { mobilePhone = newValue }
     }
+
+    var newCredits: Int {
+        get { return credits }
+        set { credits = newValue }
+    }
 }
 
 extension Member {

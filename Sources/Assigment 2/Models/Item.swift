@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum ItemParseError: Error {
+    case itemDosentExists
+}
+
 struct Item: Identifiable, Equatable {
 
     enum Category {
