@@ -80,7 +80,8 @@ struct ItemView {
     // MARK: - Items actions
 
     func listITem(_ item: [Item]) {
-        print(item.rend)
+        print(item.renderTextTable())
+        _ = readLine()
     }
 
     func changeItemInformation() -> Actions {

@@ -31,7 +31,8 @@ func mainMenuActions(console: Console, system: inout System) {
         case .changeItem:
             checkItemTemplate(system: &system, function: doChangeItem)
         case .listItem:
-            
+            let itemID = ItemView().getItemID()
+            ItemView().listITem(system.getItem(itemID))
         case .quit:
             run = false
         }

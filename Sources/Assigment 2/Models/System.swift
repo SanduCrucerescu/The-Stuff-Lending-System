@@ -65,6 +65,7 @@ struct System {
         if let index = members.firstIndex(where: {$0.id == owner.id}) {
             members[index].addItem(item)
             members[index].newCredits = members[index].credits + 100
+            print(members[index])
         }
     }
 
@@ -92,9 +93,16 @@ struct System {
     }
 
     mutating func changeItemName(_ ownerEmail: String, _ itemID: String, _ newName: String) {
+        print("1")
+        print("Owner: \(ownerEmail)")
+        print("ItemID: \(itemID)")
+        print("NewName: \(newName)")
         if let memberIndex = members.firstIndex(where: {$0.email == ownerEmail}) {
+            print("2")
             if let itemIndex = members[memberIndex].ownedItems.firstIndex(where: {$0.id == itemID}) {
+                print("3")
                 members[memberIndex].newOwnedItems[itemIndex].newName = newName
+                print("here")
             }
         }
     }

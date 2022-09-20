@@ -19,7 +19,7 @@ func createItem(system: inout System, email: String) throws {
     }
 }
 
-func doChangeItem(system: inout System, itemID: String, ownerEmail: String) throws {
+func doChangeItem(ownerEmail: String, itemID: String, system: inout System) throws {
     var choice = ItemView().changeItemInformation()
 
     switch choice {
@@ -40,29 +40,27 @@ func doChangeItem(system: inout System, itemID: String, ownerEmail: String) thro
     }
 }
 
-func checkItemTemplate(system: inout System, function: (inout System, String, String) throws -> Void) {
+func checkItemTemplate(system: inout System, function: (String, String, inout System) throws -> Void) {
     var run = true
-    var ownerEmail = ""
-    var itemID = ""
+    var ownerEmail = MemberView().getMemerEmail()
+    var itemID = ItemView().getItemID()
 
-    repeat {
+    while run {
         do {
-            ownerEmail = MemberView().getMemerEmail()
             _ = try system.checkMemberExists(ownerEmail)
-            itemID = ItemView().getItemID()
             _ = try system.checkItemExists(ownerEmail, itemID)
 
-            try function(&system, ownerEmail, itemID)
+            try function(ownerEmail, itemID, &system)
             run = false
         } catch MemberParseError.userDoesntExist {
-            ownerEmail = MemberView().getMemerEmail()
+            ownerEmail = MemberView().memberDosentExist()
             guard ownerEmail != "q" || ownerEmail != "Q" else {
                 run = false
                 return
             }
             run = true
         } catch ItemParseError.itemDosentExists {
-            itemID = MemberView().getMemerEmail()
+            itemID = ItemView().getItemID()
             guard itemID != "q" || itemID != "Q" else {
                 run = false
                 return
@@ -70,9 +68,6 @@ func checkItemTemplate(system: inout System, function: (inout System, String, St
             run = true
         } catch {
         }
-    } while run
+    }
 }
 
-func listItem() {
-    
-}
