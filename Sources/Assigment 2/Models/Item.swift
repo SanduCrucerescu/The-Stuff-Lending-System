@@ -73,5 +73,5 @@ extension Item: TextTableRepresentable {
 
     var tableValues: [CustomStringConvertible] {
         [id, name, description, String(describing: category), costPerDay]
-    }    
+    } 
 }

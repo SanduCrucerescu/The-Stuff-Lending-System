@@ -11,6 +11,7 @@ import SwiftyTextTable
 struct System {
     private(set) var time: Date
     private(set) var members: [Member] = []
+    // TODO: - Extract to item to a different array and store the owner and the contracts in the itemss
 
     // MARK: - Member functions
 
@@ -127,6 +128,14 @@ struct System {
         if let memberIndex = members.firstIndex(where: {$0.email == ownerEmail}) {
             if let itemIndex = members[memberIndex].ownedItems.firstIndex(where: {$0.id == itemID}) {
                 members[memberIndex].newOwnedItems[itemIndex].newCostPerDay = newItemCostPerDay
+            }
+        }
+    }
+
+    mutating func removeItem(_ ownerEmail: String, _ itemID: String) {
+        if let memberIndex = members.firstIndex(where: {$0.email == ownerEmail}) {
+            if let itemIndex = members[memberIndex].ownedItems.firstIndex(where: {$0.id == itemID}) {
+                members[memberIndex].newOwnedItems.remove(at: itemIndex)
             }
         }
     }

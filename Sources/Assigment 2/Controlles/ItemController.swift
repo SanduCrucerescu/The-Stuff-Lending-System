@@ -71,3 +71,6 @@ func checkItemTemplate(system: inout System, function: (String, String, inout Sy
     }
 }
 
+func removeItem(_ ownerEmail: String, _ itemID: String, _ system: inout System) throws {
+    system.removeItem(ownerEmail, itemID)
+}

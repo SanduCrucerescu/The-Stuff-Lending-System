@@ -17,6 +17,7 @@ struct Console {
         case createItem
         case changeItem
         case listItem
+        case deleteItem
         case quit
     } //
 
@@ -30,6 +31,7 @@ struct Console {
         print("6 - Create Item for member")
         print("7 - Change item information")
         print("8 - List Item")
+        print("9 - Delete Item")
         print("q - Quit")
         print("\nPlease select a function: ", terminator: "") //
 
@@ -54,6 +56,8 @@ struct Console {
             return Actions.changeItem
         } else if choice == "8" {
             return Actions.listItem
+        } else if choice == "9" {
+            return Actions.deleteItem
         }
 
         return Actions.quit

@@ -33,6 +33,8 @@ func mainMenuActions(console: Console, system: inout System) {
         case .listItem:
             let itemID = ItemView().getItemID()
             ItemView().listITem(system.getItem(itemID))
+        case .deleteItem:
+            checkItemTemplate(system: &system, function: removeItem)
         case .quit:
             run = false
         }
