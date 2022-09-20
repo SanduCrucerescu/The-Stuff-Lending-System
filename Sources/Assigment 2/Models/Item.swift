@@ -28,4 +28,34 @@ struct Item: Identifiable, Equatable {
     private(set) var creationDate: Date
     private(set) var category: Category
     private(set) var costPerDay: Int
+
+    init(id: String = UUID().uuidString, name: String, description: String, creationDate: Date, category: Category, costPerDay: Int) {
+        self.id = id
+        self.name = name
+        self.description = description
+        self.creationDate = creationDate
+        self.category = category
+        self.costPerDay = costPerDay
+    }
+
+    var newName: String {
+        get { return name }
+        set { name = newValue}
+    }
+
+    var newDescription: String {
+        get { return description }
+        set { description = newValue }
+    }
+
+    var newCategory: Category {
+        get { return category }
+        set { category = newValue }
+    }
+
+    var newCostPerDay: Int {
+        get { return costPerDay }
+        set { costPerDay = newValue }
+    }
+
 }

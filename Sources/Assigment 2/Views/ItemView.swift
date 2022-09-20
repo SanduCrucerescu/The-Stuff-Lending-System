@@ -14,6 +14,7 @@ struct ItemView {
         case description
         case category
         case costPerDay
+        case back
     }
 
     func getCategory() -> Item.Category {
@@ -63,6 +64,24 @@ struct ItemView {
     func deleteItem() {
     }
 
-    func changeItemInformation() {
+    func changeItemInformation() -> Actions {
+        print("1. Name")
+        print("2. Description")
+        print("3. Category")
+        print("4. Cost Per Day")
+        print("Enter value you want to change | q - exit: ", terminator: "")
+        let choise = readLine() ?? ""
+
+        if choise == "1" {
+            return Actions.name
+        } else if choise == "2" {
+            return Actions.description
+        } else if choise == "3" {
+            return Actions.category
+        } else if choise == "4" {
+            return Actions.costPerDay
+        }
+
+        return Actions.back
     }
 }

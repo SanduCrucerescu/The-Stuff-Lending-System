@@ -18,7 +18,7 @@ struct Member: Identifiable {
     private(set) var id = UUID().uuidString.prefix(6)
     private(set) var name: String
     private(set) var email: String
-    private(set) var mobilePhone: String
+    private(set) var phoneNumber: String
     private(set) var ownedItems: [Item]
     private(set) var credits: Int
 
@@ -29,7 +29,7 @@ struct Member: Identifiable {
          credits: Int, members: [Member]) throws {
         self.name = name
         self.email = try Self.checkEmail(email, members)
-        self.mobilePhone = try Self.checkPhoneNumber(mobilePhone, members)
+        self.phoneNumber = try Self.checkPhoneNumber(mobilePhone, members)
         self.ownedItems = ownedItems
         self.credits = credits
     }
@@ -49,14 +49,20 @@ struct Member: Identifiable {
     }
 
     var newPhoneNumber: String {
-        get { return mobilePhone }
-        set { mobilePhone = newValue }
+        get { return phoneNumber }
+        set { phoneNumber = newValue }
     }
 
     var newCredits: Int {
         get { return credits }
         set { credits = newValue }
     }
+
+    var newOwnedItems: [Item] {
+        get { return ownedItems }
+        set { ownedItems = newValue }
+    }
+
 }
 
 extension Member {
@@ -68,7 +74,7 @@ extension Member {
     }
 
     private static func checkPhoneNumber (_ phoneNumber: String, _ members: [Member]) throws -> String {
-        guard !members.contains(where: {$0.mobilePhone == phoneNumber}) else {
+        guard !members.contains(where: {$0.phoneNumber == phoneNumber}) else {
             throw MemberParseError.usedPhoneNumber
         }
         return phoneNumber
@@ -81,7 +87,7 @@ extension Member: TextTableRepresentable {
     }
 
     var tableValues: [CustomStringConvertible] {
-        [name, email, mobilePhone, credits, ownedItems.count]
+        [name, email, phoneNumber, credits, ownedItems.count]
     }
 
 }
