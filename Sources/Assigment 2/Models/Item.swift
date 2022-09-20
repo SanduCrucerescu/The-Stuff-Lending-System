@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyTextTable
 
 enum ItemParseError: Error {
     case itemDosentExists
@@ -29,7 +30,12 @@ struct Item: Identifiable, Equatable {
     private(set) var category: Category
     private(set) var costPerDay: Int
 
-    init(id: String = UUID().uuidString, name: String, description: String, creationDate: Date, category: Category, costPerDay: Int) {
+    init(id: String = UUID().uuidString,
+         name: String,
+         description: String,
+         creationDate: Date,
+         category: Category,
+         costPerDay: Int) {
         self.id = id
         self.name = name
         self.description = description
@@ -58,4 +64,16 @@ struct Item: Identifiable, Equatable {
         set { costPerDay = newValue }
     }
 
+}
+
+extension Item: TextTableRepresentable {
+    static var columnHeaders: [String] {
+        ["ID", "Name", "Description", "Category", "Cost Per Day"]
+    }
+
+    var tableValues: [CustomStringConvertible] {
+        <#code#>
+    }
+
+    
 }

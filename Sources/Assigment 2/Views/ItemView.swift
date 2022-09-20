@@ -59,9 +59,28 @@ struct ItemView {
         return itemID
     }
 
+    func getNewName() -> String {
+        print("Enter new item name: ", terminator: "")
+        let name = readLine() ?? ""
+        return name
+    }
+
+    func getNewDescription() -> String {
+        print("Enter new item description: ", terminator: "")
+        let description = readLine() ?? ""
+        return description
+    }
+
+    func getNewCostPerDay() -> Int {
+        print("Enter new cost per day name: ", terminator: "")
+        let costPerDay = readLine() ?? ""
+        return Int(costPerDay) ?? 0
+    }
+
     // MARK: - Items actions
 
-    func deleteItem() {
+    func listITem(_ item: [Item]) {
+        print(item.rend)
     }
 
     func changeItemInformation() -> Actions {

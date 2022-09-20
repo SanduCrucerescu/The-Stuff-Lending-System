@@ -68,6 +68,19 @@ struct System {
         }
     }
 
+    func getItem(_ itemID: String) -> [Item] {
+        var item = [Item]()
+        let ownerEmail = "a"
+
+        if let memberIndex = members.firstIndex(where: {$0.email == ownerEmail}) {
+            if let itemIndex = members[memberIndex].ownedItems.first(where: {$0.id == itemID}) {
+                item.append(itemIndex)
+                return item
+            }
+        }
+        return item
+    }
+
     func checkItemExists(_ ownerEmail: String, _ itemID: String) throws -> Bool {
         if let memberIndex = members.firstIndex(where: {$0.email == ownerEmail}) {
             guard members[memberIndex].ownedItems.contains(where: {$0.id == itemID}) else {
@@ -80,7 +93,7 @@ struct System {
 
     mutating func changeItemName(_ ownerEmail: String, _ itemID: String, _ newName: String) {
         if let memberIndex = members.firstIndex(where: {$0.email == ownerEmail}) {
-            if let itemIndex = members[memberIndex].ownedItems.firstIndex(where: {$0.id == itemID}){
+            if let itemIndex = members[memberIndex].ownedItems.firstIndex(where: {$0.id == itemID}) {
                 members[memberIndex].newOwnedItems[itemIndex].newName = newName
             }
         }
@@ -88,23 +101,23 @@ struct System {
 
     mutating func changeItemDescription(_ ownerEmail: String, _ itemID: String, _ newDescription: String) {
         if let memberIndex = members.firstIndex(where: {$0.email == ownerEmail}) {
-            if let itemIndex = members[memberIndex].ownedItems.firstIndex(where: {$0.id == itemID}){
+            if let itemIndex = members[memberIndex].ownedItems.firstIndex(where: {$0.id == itemID}) {
                 members[memberIndex].newOwnedItems[itemIndex].newDescription = newDescription
             }
         }
     }
 
-    mutating func chnageCategory(_ ownerEmail: String, _ itemID: String, _ newCategoty: Item.Category) {
+    mutating func chanageItemCategory(_ ownerEmail: String, _ itemID: String, _ newCategoty: Item.Category) {
         if let memberIndex = members.firstIndex(where: {$0.email == ownerEmail}) {
-            if let itemIndex = members[memberIndex].ownedItems.firstIndex(where: {$0.id == itemID}){
+            if let itemIndex = members[memberIndex].ownedItems.firstIndex(where: {$0.id == itemID}) {
                 members[memberIndex].newOwnedItems[itemIndex].newCategory = newCategoty
             }
         }
     }
 
-    mutating func chnageItemCostPerDay(_ ownerEmail: String, _ itemID: String, _ newItemCostPerDay: Int) {
+    mutating func changeItemCostPerDay(_ ownerEmail: String, _ itemID: String, _ newItemCostPerDay: Int) {
         if let memberIndex = members.firstIndex(where: {$0.email == ownerEmail}) {
-            if let itemIndex = members[memberIndex].ownedItems.firstIndex(where: {$0.id == itemID}){
+            if let itemIndex = members[memberIndex].ownedItems.firstIndex(where: {$0.id == itemID}) {
                 members[memberIndex].newOwnedItems[itemIndex].newCostPerDay = newItemCostPerDay
             }
         }

@@ -19,37 +19,60 @@ func createItem(system: inout System, email: String) throws {
     }
 }
 
-func doChangeItem(system: inout System, itemID: String, ownerEmail: String) {
+func doChangeItem(system: inout System, itemID: String, ownerEmail: String) throws {
     var choice = ItemView().changeItemInformation()
 
     switch choice {
     case .name:
-        print("")
+        let newItemName = ItemView().getNewName()
+        system.changeItemName(ownerEmail, itemID, newItemName)
     case .description:
-        print("")
+        let newDescription = ItemView().getNewDescription()
+        system.changeItemDescription(ownerEmail, itemID, newDescription)
     case .category:
-        print("")
+        let newCategory = ItemView().getCategory()
+        system.chanageItemCategory(ownerEmail, itemID, newCategory)
     case .costPerDay:
-        print("")
+        let newCostPerDay = ItemView().getNewCostPerDay()
+        system.changeItemCostPerDay(ownerEmail, itemID, newCostPerDay)
     case .back:
-        print("")
+        choice = ItemView.Actions.back
     }
 }
 
+func checkItemTemplate(system: inout System, function: (inout System, String, String) throws -> Void) {
+    var run = true
+    var ownerEmail = ""
+    var itemID = ""
 
-//do {
-//        let userExists = try system.checkMemberExists(ownerEmail)
-//        let itemExists = try system.checkItemExists(ownerEmail, itemID)
-//
-//
-//
-//
-//    } catch MemberParseError.userDoesntExist {
-//
-//    } catch ItemParseError.itemDosentExists {
-//
-//    } catch {
-//
-//    }
+    repeat {
+        do {
+            ownerEmail = MemberView().getMemerEmail()
+            _ = try system.checkMemberExists(ownerEmail)
+            itemID = ItemView().getItemID()
+            _ = try system.checkItemExists(ownerEmail, itemID)
 
+            try function(&system, ownerEmail, itemID)
+            run = false
+        } catch MemberParseError.userDoesntExist {
+            ownerEmail = MemberView().getMemerEmail()
+            guard ownerEmail != "q" || ownerEmail != "Q" else {
+                run = false
+                return
+            }
+            run = true
+        } catch ItemParseError.itemDosentExists {
+            itemID = MemberView().getMemerEmail()
+            guard itemID != "q" || itemID != "Q" else {
+                run = false
+                return
+            }
+            run = true
+        } catch {
+        }
+    } while run
+}
 
+func listItem() {
+    
+}

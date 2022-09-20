@@ -15,17 +15,21 @@ struct Console {
         case listMember
         case changeMember
         case createItem
+        case changeItem
+        case listItem
         case quit
     } //
 
     func mainMenu() -> Actions {
         print("\n    The Stuff Lending System")
-        print("add - Add new member")
-        print("remove - Remove member")
-        print("change - Change a member's information")
-        print("check - Look at a specific members full information")
-        print("list - List Members")
-        print("create - Create Item for member")
+        print("1 - Add new member")
+        print("2 - Remove member")
+        print("3 - Change a member's information")
+        print("4 - Look at a specific members full information")
+        print("5 - List Members")
+        print("6 - Create Item for member")
+        print("7 - Change item information")
+        print("8 - List Item")
         print("q - Quit")
         print("\nPlease select a function: ", terminator: "") //
 
@@ -34,18 +38,22 @@ struct Console {
 
         if choice == "q" || choice == "Q" {
             return Actions.quit
-        } else if choice == "add" {
+        } else if choice == "1" {
             return Actions.addMember
-        } else if choice == "remove" {
+        } else if choice == "2" {
             return Actions.removeMemeber
-        } else if choice == "list" {
-            return Actions.listMembers
-        } else if choice == "change" {
+        } else if choice == "3" {
             return Actions.changeMember
-        } else if choice == "create" {
-            return Actions.createItem
-        } else if choice == "check" {
+        } else if choice == "4" {
             return Actions.listMember
+        } else if choice == "5" {
+            return Actions.listMembers
+        } else if choice == "6" {
+            return Actions.createItem
+        } else if choice == "7" {
+            return Actions.changeItem
+        } else if choice == "8" {
+            return Actions.listItem
         }
 
         return Actions.quit

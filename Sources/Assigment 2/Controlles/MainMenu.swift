@@ -28,6 +28,10 @@ func mainMenuActions(console: Console, system: inout System) {
             checkEmailTemplate(system: &system, function: doChangeUser)
         case .createItem:
             checkEmailTemplate(system: &system, function: createItem)
+        case .changeItem:
+            checkItemTemplate(system: &system, function: doChangeItem)
+        case .listItem:
+            
         case .quit:
             run = false
         }
