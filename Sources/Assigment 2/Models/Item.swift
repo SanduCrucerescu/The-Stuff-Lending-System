@@ -31,7 +31,7 @@ struct Item: Identifiable, Equatable {
     private(set) var owner: Member
     private(set) var name: String
     private(set) var description: String
-    private(set) var creationDate: Date
+    private(set) var creationDate: Int
     private(set) var category: Category
     private(set) var costPerDay: Int
 
@@ -39,7 +39,7 @@ struct Item: Identifiable, Equatable {
          owner: Member,
          name: String,
          description: String,
-         creationDate: Date,
+         creationDate: Int,
          category: Category,
          costPerDay: Int) {
         self.id = id

@@ -38,7 +38,7 @@ struct ItemView {
 
     // MARK: - Get item Data
 
-    func createNewItem(creationDate: Date, category: Item.Category, owner: Member) -> Item {
+    func createNewItem(creationDate: Int, category: Item.Category, owner: Member) -> Item {
         print("Enter item name: ", terminator: "")
         let name = readLine() ?? ""
         print("Enter item desctiption: ", terminator: "")

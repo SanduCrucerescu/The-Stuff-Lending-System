@@ -18,8 +18,9 @@ struct Console {
         case changeItem
         case listItem
         case deleteItem
+        case createContract
         case quit
-    } //
+    }
 
     func mainMenu() -> Actions {
         print("\n    The Stuff Lending System")
@@ -32,6 +33,7 @@ struct Console {
         print("7 - Change item information")
         print("8 - List Item")
         print("9 - Delete Item")
+        print("10 - Create new contract")
         print("q - Quit")
         print("\nPlease select a function: ", terminator: "") //
 
@@ -58,6 +60,8 @@ struct Console {
             return Actions.listItem
         } else if choice == "9" {
             return Actions.deleteItem
+        } else if choice == "10" {
+            return Actions.createContract
         }
 
         return Actions.quit

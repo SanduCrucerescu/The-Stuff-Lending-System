@@ -9,7 +9,7 @@ import Foundation
 import SwiftyTextTable
 
 struct System {
-    private(set) var time: Date
+    private(set) var time: Int = 0
     private(set) var members: [Member] = []
     private(set) var items: [Item] = []
 
