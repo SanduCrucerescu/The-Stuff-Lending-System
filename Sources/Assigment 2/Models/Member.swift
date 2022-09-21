@@ -19,13 +19,13 @@ struct Member: Identifiable {
     private(set) var name: String
     private(set) var email: String
     private(set) var phoneNumber: String
-    private(set) var ownedItems: [Item]
+    private(set) var ownedItems: Int
     private(set) var credits: Int
 
     init(name: String,
          email: String,
          mobilePhone: String,
-         ownedItems: [Item],
+         ownedItems: Int,
          credits: Int, members: [Member]) throws {
         self.name = name
         self.email = try Self.checkEmail(email, members)
@@ -34,9 +34,9 @@ struct Member: Identifiable {
         self.credits = credits
     }
 
-    mutating func addItem(_ item: Item) {
-        ownedItems.append(item)
-    }
+//    mutating func addItem(_ item: Item) {
+//        ownedItems.append(item)
+//    }
 
     var newName: String {
         get { return name }
@@ -58,7 +58,7 @@ struct Member: Identifiable {
         set { credits = newValue }
     }
 
-    var newOwnedItems: [Item] {
+    var newOwnedItems: Int {
         get { return ownedItems }
         set { ownedItems = newValue }
     }
@@ -87,7 +87,7 @@ extension Member: TextTableRepresentable {
     }
 
     var tableValues: [CustomStringConvertible] {
-        [name, email, phoneNumber, credits, ownedItems.count]
+        [name, email, phoneNumber, credits, ownedItems]
     }
 
 }

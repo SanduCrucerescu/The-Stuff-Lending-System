@@ -11,7 +11,7 @@ import SwiftyTextTable
 struct System {
     private(set) var time: Date
     private(set) var members: [Member] = []
-    // TODO: - Extract to item to a different array and store the owner and the contracts in the itemss
+    private(set) var items: [Item] = []
 
     // MARK: - Member functions
 
@@ -64,79 +64,59 @@ struct System {
 
     mutating func createItem(_ owner: Member, _ item: Item) {
         if let index = members.firstIndex(where: {$0.id == owner.id}) {
-            members[index].addItem(item)
-            members[index].newCredits = members[index].credits + 100
-            print(members[index])
+            members[index] = owner
+            members[index].newCredits += 100
         }
+        items.append(item)
     }
 
     func getItem(_ itemID: String) -> [Item] {
         var item = [Item]()
-        let ownerEmail = "a"
 
-        if let memberIndex = members.firstIndex(where: {$0.email == ownerEmail}) {
-            if let itemIndex = members[memberIndex].ownedItems.first(where: {$0.id == itemID}) {
-                item.append(itemIndex)
-                return item
-            }
+        if let itemIndex = items.first(where: {$0.id == itemID}) {
+            item.append(itemIndex)
+            return item
         }
+
         return item
     }
 
     func checkItemExists(_ ownerEmail: String, _ itemID: String) throws -> Bool {
-        if let memberIndex = members.firstIndex(where: {$0.email == ownerEmail}) {
-            guard members[memberIndex].ownedItems.contains(where: {$0.id == itemID}) else {
-                throw ItemParseError.itemDosentExists
-            }
-            return true
+
+        guard items.contains(where: {$0.id == itemID}) else {
+            throw ItemParseError.itemDosentExists
         }
+
         return true
     }
 
     mutating func changeItemName(_ ownerEmail: String, _ itemID: String, _ newName: String) {
-        print("1")
-        print("Owner: \(ownerEmail)")
-        print("ItemID: \(itemID)")
-        print("NewName: \(newName)")
-        if let memberIndex = members.firstIndex(where: {$0.email == ownerEmail}) {
-            print("2")
-            if let itemIndex = members[memberIndex].ownedItems.firstIndex(where: {$0.id == itemID}) {
-                print("3")
-                members[memberIndex].newOwnedItems[itemIndex].newName = newName
-                print("here")
-            }
+        if let itemIndex = items.firstIndex(where: {$0.id == itemID}) {
+            items[itemIndex].newName = newName
         }
     }
 
     mutating func changeItemDescription(_ ownerEmail: String, _ itemID: String, _ newDescription: String) {
-        if let memberIndex = members.firstIndex(where: {$0.email == ownerEmail}) {
-            if let itemIndex = members[memberIndex].ownedItems.firstIndex(where: {$0.id == itemID}) {
-                members[memberIndex].newOwnedItems[itemIndex].newDescription = newDescription
-            }
+        if let itemIndex = items.firstIndex(where: {$0.id == itemID}) {
+            items[itemIndex].newDescription = newDescription
         }
     }
 
-    mutating func chanageItemCategory(_ ownerEmail: String, _ itemID: String, _ newCategoty: Item.Category) {
-        if let memberIndex = members.firstIndex(where: {$0.email == ownerEmail}) {
-            if let itemIndex = members[memberIndex].ownedItems.firstIndex(where: {$0.id == itemID}) {
-                members[memberIndex].newOwnedItems[itemIndex].newCategory = newCategoty
-            }
+    mutating func chanageItemCategory(_ ownerEmail: String, _ itemID: String, _ newCategory: Item.Category) {
+        if let itemIndex = items.firstIndex(where: {$0.id == itemID}) {
+            items[itemIndex].newCategory = newCategory
         }
     }
 
     mutating func changeItemCostPerDay(_ ownerEmail: String, _ itemID: String, _ newItemCostPerDay: Int) {
-        if let memberIndex = members.firstIndex(where: {$0.email == ownerEmail}) {
-            if let itemIndex = members[memberIndex].ownedItems.firstIndex(where: {$0.id == itemID}) {
-                members[memberIndex].newOwnedItems[itemIndex].newCostPerDay = newItemCostPerDay
-            }
+        if let itemIndex = items.firstIndex(where: {$0.id == itemID}) {
+            items[itemIndex].newCostPerDay = newItemCostPerDay
         }
     }
 
     mutating func removeItem(_ ownerEmail: String, _ itemID: String) {
-        if let memberIndex = members.firstIndex(where: {$0.email == ownerEmail}) {
-            if let itemIndex = members[memberIndex].ownedItems.firstIndex(where: {$0.id == itemID}) {
-                members[memberIndex].newOwnedItems.remove(at: itemIndex)
-            }
+        if let itemIndex = items.firstIndex(where: {$0.id == itemID}) {
+            items.remove(at: itemIndex)
         }
     }
 }

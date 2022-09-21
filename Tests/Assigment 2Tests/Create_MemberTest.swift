@@ -38,7 +38,7 @@ final class CreateMember: XCTestCase {
         let john = try? Member(name: "Allan",
                               email: "allan@enigma.com",
                               mobilePhone: "123456",
-                              ownedItems: [],
+                              ownedItems: 0,
                               credits: 0,
                               members: [])
 
@@ -50,7 +50,7 @@ final class CreateMember: XCTestCase {
             let allan = try Member(name: "Allan",
                                   email: "allan@enigma.com",
                                   mobilePhone: "123456",
-                                  ownedItems: [],
+                                  ownedItems: 0,
                                   credits: 0,
                                   members: self.system.members)
             self.system.addNewMember(allan)
@@ -58,7 +58,7 @@ final class CreateMember: XCTestCase {
             let turing = try Member(name: "Turing",
                                   email: "allan@enigma.com",
                                   mobilePhone: "123",
-                                  ownedItems: [],
+                                  ownedItems: 0,
                                   credits: 0,
                                   members: self.system.members)
 
@@ -67,7 +67,7 @@ final class CreateMember: XCTestCase {
             let turing2 = try  Member(name: "Turing",
                                       email: "allan@enigma.com",
                                       mobilePhone: "123456",
-                                      ownedItems: [],
+                                      ownedItems: 0,
                                       credits: 0,
                                       members: self.system.members)
 

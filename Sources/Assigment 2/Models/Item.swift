@@ -13,6 +13,10 @@ enum ItemParseError: Error {
 }
 
 struct Item: Identifiable, Equatable {
+    static func == (lhs: Item, rhs: Item) -> Bool {
+        let val = lhs.name == rhs.name
+        return val
+    }
 
     enum Category {
         case tool
@@ -24,6 +28,7 @@ struct Item: Identifiable, Equatable {
     }
 
     private(set) var id = UUID().uuidString
+    private(set) var owner: Member
     private(set) var name: String
     private(set) var description: String
     private(set) var creationDate: Date
@@ -31,12 +36,14 @@ struct Item: Identifiable, Equatable {
     private(set) var costPerDay: Int
 
     init(id: String = UUID().uuidString,
+         owner: Member,
          name: String,
          description: String,
          creationDate: Date,
          category: Category,
          costPerDay: Int) {
         self.id = id
+        self.owner = owner
         self.name = name
         self.description = description
         self.creationDate = creationDate

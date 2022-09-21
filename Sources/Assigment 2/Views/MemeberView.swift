@@ -73,7 +73,7 @@ struct MemberView {
                 let newMember = try Member(name: name,
                                            email: email,
                                            mobilePhone: phoneNumber,
-                                           ownedItems: [Item](),
+                                           ownedItems: 0,
                                            credits: 0, members: members)
                 status = false
                 return newMember

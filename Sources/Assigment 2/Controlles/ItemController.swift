@@ -9,10 +9,12 @@ import Foundation
 
 func createItem(system: inout System, email: String) throws {
     do {
-        let owner = try system.getMember(email)
+        var owner = try system.getMember(email)
         let category = ItemView().getCategory()
+        owner.newOwnedItems += 1
         let item = ItemView().createNewItem(creationDate: system.time,
-                                            category: category)
+                                            category: category,
+                                            owner: owner)
         system.createItem(owner, item)
     } catch {
         throw MemberParseError.userDoesntExist
