@@ -85,6 +85,11 @@ struct ItemView {
         _ = readLine()
     }
 
+    func listItems(_ items: [Item]) {
+        print(items.renderTextTable())
+        _ = readLine()
+    }
+
     func changeItemInformation() -> Actions {
         print("1. Name")
         print("2. Description")

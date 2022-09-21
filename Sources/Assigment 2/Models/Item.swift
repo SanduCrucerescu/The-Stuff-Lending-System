@@ -27,28 +27,28 @@ struct Item: Identifiable, Equatable {
         case other
     }
 
-    private(set) var id = UUID().uuidString
+    private(set) var id = UUID().uuidString.prefix(8)
     private(set) var owner: Member
     private(set) var name: String
     private(set) var description: String
     private(set) var creationDate: Int
     private(set) var category: Category
     private(set) var costPerDay: Int
+    private(set) var contracts: [Contract]
 
-    init(id: String = UUID().uuidString,
-         owner: Member,
+    init(owner: Member,
          name: String,
          description: String,
          creationDate: Int,
          category: Category,
          costPerDay: Int) {
-        self.id = id
         self.owner = owner
         self.name = name
         self.description = description
         self.creationDate = creationDate
         self.category = category
         self.costPerDay = costPerDay
+        self.contracts = []
     }
 
     var newName: String {
@@ -71,14 +71,21 @@ struct Item: Identifiable, Equatable {
         set { costPerDay = newValue }
     }
 
+    mutating func addContract(_ contract: Contract) {
+        contracts.append(contract)
+    }
 }
 
 extension Item: TextTableRepresentable {
     static var columnHeaders: [String] {
-        ["ID", "Name", "Description", "Category", "Cost Per Day"]
+        ["ID","Name", "Description", "Category", "Cost Per Day", "Contract"]
     }
 
     var tableValues: [CustomStringConvertible] {
-        [id, name, description, String(describing: category), costPerDay]
-    } 
+        [id, name, description, String(describing: category), costPerDay, contracts]
+    }
+
+    static var tableHeader: String? {
+        return "Items in store"
+    }
 }

@@ -119,4 +119,33 @@ struct System {
             items.remove(at: itemIndex)
         }
     }
+    // MARK: - Contract functions
+
+    func checkItemFree(_ itemID: String, _ startDay: Int, _ endDay: Int) -> Bool {
+//        if let index = items.firstIndex(where: {$0.id == itemID}) {
+//            for contract in items[index].contracts {
+////                if contract.startDay <= startDay && endDay >= contract.endDate  {
+////                    return false
+////                }
+//                let iRange = contract.startDay ... contract.endDate
+//                let dRange = startDay ... endDay
+//                return iRange.overlaps(dRange)
+//            }
+//        }
+//        return true
+        let s = 1
+        let e = 3
+        let iRange = s...e
+        let dRange = startDay..<endDay
+        let status = iRange.overlaps(dRange) || s == startDay ? true : false
+        return status
+    }
+
+    mutating func createContract(_ itemID: String, _ contract: Contract) {
+        if let index = items.firstIndex(where: {$0.id == itemID}) {
+            items[index].addContract(contract)
+        }
+    }
 }
+
+

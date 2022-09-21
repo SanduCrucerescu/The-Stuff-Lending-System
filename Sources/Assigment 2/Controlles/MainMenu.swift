@@ -36,7 +36,7 @@ func mainMenuActions(console: Console, system: inout System) {
         case .deleteItem:
             checkItemTemplate(system: &system, function: removeItem)
         case .createContract:
-            print("")
+            createContract(system: &system)
         case .quit:
             run = false
         }

@@ -32,7 +32,7 @@ final class CreateMember: XCTestCase {
 //            // Put the code you want to measure the time of here.
 //        }
 //    }
-    var system =  System(time: Date())
+    var system =  System()
 
     func test_CreateMember() {
         let john = try? Member(name: "Allan",
@@ -83,4 +83,10 @@ final class CreateMember: XCTestCase {
         } catch {
         }
     }
+
+//    func test_checkContract() {
+//        let i = self.system.checkItemFree("asa", 4, 5)
+//        Swift.print(i)
+//        XCTAssertTrue(i)
+//    }
 }
