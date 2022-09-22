@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyTextTable
 
 struct Contract: Identifiable {
     private(set) var id = UUID().uuidString
@@ -20,5 +21,19 @@ struct Contract: Identifiable {
         self.startDay = startDay
         self.endDate = endDate
         self.cost = cost
+    }
+}
+
+extension Contract: TextTableRepresentable {
+    static var columnHeaders: [String] {
+        ["Borrower ID", "Start Day", "End Day", "Cost"]
+    }
+
+    var tableValues: [CustomStringConvertible] {
+        [borrower.id, startDay, endDate, cost]
+    }
+
+    static var tableHeader: String? {
+        return "Contract History"
     }
 }

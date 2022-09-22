@@ -19,6 +19,7 @@ struct Console {
         case listItem
         case deleteItem
         case createContract
+        case advanceDay
         case quit
     }
 
@@ -34,6 +35,7 @@ struct Console {
         print("8 - List Item")
         print("9 - Delete Item")
         print("10 - Create new contract")
+        print("11 - Advance Day")
         print("q - Quit")
         print("\nPlease select a function: ", terminator: "") //
 
@@ -62,6 +64,8 @@ struct Console {
             return Actions.deleteItem
         } else if choice == "10" {
             return Actions.createContract
+        } else if choice == "11" {
+            return Actions.advanceDay
         }
 
         return Actions.quit

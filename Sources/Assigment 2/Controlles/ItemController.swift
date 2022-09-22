@@ -12,7 +12,7 @@ func createItem(system: inout System, email: String) throws {
         var owner = try system.getMember(email)
         let category = ItemView().getCategory()
         owner.newOwnedItems += 1
-        let item = ItemView().createNewItem(creationDate: system.time,
+        let item = ItemView().createNewItem(creationDate: system.day,
                                             category: category,
                                             owner: owner)
         system.createItem(owner, item)
@@ -36,7 +36,7 @@ func doChangeItem(ownerEmail: String, itemID: String, system: inout System) thro
         system.chanageItemCategory(ownerEmail, itemID, newCategory)
     case .costPerDay:
         let newCostPerDay = ItemView().getNewCostPerDay()
-        system.changeItemCostPerDay(ownerEmail, itemID, newCostPerDay)
+        try? system.changeItemCostPerDay(ownerEmail, itemID, newCostPerDay) // TODO: - fix this catch
     case .back:
         choice = ItemView.Actions.back
     }

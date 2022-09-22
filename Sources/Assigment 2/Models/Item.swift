@@ -10,6 +10,7 @@ import SwiftyTextTable
 
 enum ItemParseError: Error {
     case itemDosentExists
+    case costNotANumber
 }
 
 struct Item: Identifiable, Equatable {
@@ -34,6 +35,7 @@ struct Item: Identifiable, Equatable {
     private(set) var creationDate: Int
     private(set) var category: Category
     private(set) var costPerDay: Int
+    private(set) var isAvalible: Bool = true
     private(set) var contracts: [Contract]
 
     init(owner: Member,
@@ -41,13 +43,13 @@ struct Item: Identifiable, Equatable {
          description: String,
          creationDate: Int,
          category: Category,
-         costPerDay: Int) {
+         costPerDay: String) throws {
         self.owner = owner
         self.name = name
         self.description = description
         self.creationDate = creationDate
         self.category = category
-        self.costPerDay = costPerDay
+        self.costPerDay = try Self.checkCost(costPerDay)
         self.contracts = []
     }
 
@@ -68,25 +70,35 @@ struct Item: Identifiable, Equatable {
 
     var newCostPerDay: Int {
         get { return costPerDay }
-        set { costPerDay = newValue }
+        set { costPerDay = newValue}
+    }
+
+    var newStatus: Bool {
+        get { return isAvalible }
+        set { isAvalible = newValue }
     }
 
     mutating func addContract(_ contract: Contract) {
         contracts.append(contract)
     }
 }
+extension Item {
+    private static func checkCost (_ costPerDay: String) throws -> Int {
+        guard costPerDay.isNumber else {
+            throw ItemParseError.costNotANumber
+        }
+        return Int(costPerDay) ?? 0
+    }
+}
+
 
 extension Item: TextTableRepresentable {
     static var columnHeaders: [String] {
-        ["ID", "Name", "Description", "Category", "Cost Per Day", "Contract", "Is Avalible"]
+        ["ID", "Name", "Description", "Category", "Cost Per Day", "Is Avalible"]
     }
 
     var tableValues: [CustomStringConvertible] {
-        var isAvalible = true
-//        for contract in contracts {
-//
-//        }
-        return [id, name, description, String(describing: category), costPerDay, contracts, isAvalible]
+        return [id, name, description, String(describing: category), costPerDay, isAvalible]
     }
 
     static var tableHeader: String? {

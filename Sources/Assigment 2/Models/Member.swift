@@ -11,6 +11,7 @@ import SwiftyTextTable
 enum MemberParseError: Error {
     case usedEmail
     case usedPhoneNumber
+    case notAPhoneNuber
     case userDoesntExist
     case notEnoughtCredits
 }
@@ -26,13 +27,12 @@ struct Member: Identifiable {
     init(name: String,
          email: String,
          mobilePhone: String,
-         ownedItems: Int,
-         credits: Int, members: [Member]) throws {
+         members: [Member]) throws {
         self.name = name
         self.email = try Self.checkEmail(email, members)
         self.phoneNumber = try Self.checkPhoneNumber(mobilePhone, members)
-        self.ownedItems = ownedItems
-        self.credits = credits
+        self.ownedItems = 0
+        self.credits = 0
     }
 
     var newName: String {
@@ -74,6 +74,9 @@ extension Member {
         guard !members.contains(where: {$0.phoneNumber == phoneNumber}) else {
             throw MemberParseError.usedPhoneNumber
         }
+        guard phoneNumber.isNumber else {
+            throw MemberParseError.notAPhoneNuber
+        }
         return phoneNumber
     }
 }
@@ -86,5 +89,4 @@ extension Member: TextTableRepresentable {
     var tableValues: [CustomStringConvertible] {
         [name, email, phoneNumber, credits, ownedItems]
     }
-
 }

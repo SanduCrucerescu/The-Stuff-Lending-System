@@ -9,9 +9,22 @@ import Foundation
 import SwiftyTextTable
 
 struct System {
-    private(set) var time: Int = 0
+    private(set) var day: Int = 0
     private(set) var members: [Member] = []
     private(set) var items: [Item] = []
+
+    mutating func increaseDay() {
+        day += 1
+        for (index, item) in items.enumerated() {
+            for contract in item.contracts {
+                if contract.endDate < day || contract.startDay > day {
+                    items[index].newStatus = true
+                } else {
+                    items[index].newStatus = false
+                }
+            }
+        }
+    }
 
     // MARK: - Member functions
 
@@ -19,10 +32,8 @@ struct System {
         members.append(member)
     }
 
-    mutating func removeMember(_ email: String) {
-        members.removeAll { member in
-            member.email == email
-        }
+    mutating func removeMember(_ memberID: String) {
+        members.removeAll(where: {$0.id == memberID})
     }
 
     func getMember (_ email: String) throws -> Member {
@@ -61,7 +72,7 @@ struct System {
     }
 
     func checkMemberCredits(_ member: Member, _ credits: Int) throws {
-        guard member.newCredits < credits else {
+        guard !(member.newCredits < credits) else {
             throw MemberParseError.notEnoughtCredits
         }
     }
@@ -77,14 +88,14 @@ struct System {
     }
 
     func getItem(_ itemID: String) -> [Item] {
-        var item = [Item]()
+        var itemPrint = [Item]()
 
-        if let itemIndex = items.first(where: {$0.id == itemID}) {
-            item.append(itemIndex)
-            return item
+        if let item = items.first(where: {$0.id == itemID}) {
+            itemPrint.append(item)
+            return itemPrint
         }
 
-        return item
+        return itemPrint
     }
 
     func checkItemExists(_ ownerEmail: String, _ itemID: String) throws -> Bool {
@@ -114,10 +125,14 @@ struct System {
         }
     }
 
-    mutating func changeItemCostPerDay(_ ownerEmail: String, _ itemID: String, _ newItemCostPerDay: Int) {
+    mutating func changeItemCostPerDay(_ ownerEmail: String, _ itemID: String, _ newItemCostPerDay: String) throws {
         if let itemIndex = items.firstIndex(where: {$0.id == itemID}) {
-            items[itemIndex].newCostPerDay = newItemCostPerDay
+            guard newItemCostPerDay.isNumber else {
+                throw ItemParseError.costNotANumber
+            }
+            items[itemIndex].newCostPerDay = Int(newItemCostPerDay) ?? 0
         }
+
     }
 
     mutating func removeItem(_ ownerEmail: String, _ itemID: String) {

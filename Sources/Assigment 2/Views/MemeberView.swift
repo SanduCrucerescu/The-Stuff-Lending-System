@@ -55,7 +55,13 @@ struct MemberView {
     }
 
     func memberDosentExist() -> String {
-        print("Insert member email | q - to exit: ", terminator: "")
+        print("Member dosen't exist, insert a new member ID | q - exit: ", terminator: "")
+        let value = readLine() ?? ""
+        return value
+    }
+
+    func getMemberID() -> String {
+        print("Insert member ID | q - exit: ", terminator: "")
         let value = readLine() ?? ""
         return value
     }
@@ -73,8 +79,7 @@ struct MemberView {
                 let newMember = try Member(name: name,
                                            email: email,
                                            mobilePhone: phoneNumber,
-                                           ownedItems: 0,
-                                           credits: 0, members: members)
+                                           members: members)
                 status = false
                 return newMember
             } catch MemberParseError.usedEmail {
@@ -85,11 +90,15 @@ struct MemberView {
                 print("-- Phone Number is used --")
                 phoneNumber = reenterPhoneNumber()
                 status = true
-            } catch {
+            } catch MemberParseError.notAPhoneNuber {
+                print("-- Please insert a numerical phone number --")
+                phoneNumber = reenterPhoneNumber()
+            }
+            catch {
                 print("Other Error")
                 return nil
             }
-        } while (status)
+        } while status
         return nil
     }
 

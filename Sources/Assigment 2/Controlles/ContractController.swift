@@ -8,26 +8,44 @@
 import Foundation
 
 func createContract(system: inout System) {
-    do {
-        ItemView().listItems(system.items)
-        let index = ContractView().getItemID()
-        let start = ContractView().getStartDay()
-        let end = ContractView().getEndDay()
+    ItemView().listItems(system.items)
+    let index = ContractView().getItemID()
+    let start = ContractView().getStartDay()
+    let end = ContractView().getEndDay()
+    var run = true
+    var lenteeEmail = ""
 
-        let free = system.checkItemFree(index, start, end)
+    while run {
+        do {
+            guard index != "q" else {
+                run = false
+                return
+            }
 
-        if free {
-            let lenteeEmail = ContractView().getRentee()
-            let lenee = try system.getMember(lenteeEmail)
-            let cost = system.calculateCost(index, abs(start-end))
-            try system.checkMemberCredits(lenee, cost)
+            let free = system.checkItemFree(index, start, end)
+            run = false
 
-            let contract = Contract(borrower: lenee, startDay: start, endDate: end, cost: cost)
-            system.createContract(index, contract)
+            if free {
+                lenteeEmail = ContractView().getRentee()
+                
+                guard index != "q" else {
+                    run = false
+                    return
+                }
+
+                let lenee = try system.getMember(lenteeEmail)
+                let cost = system.calculateCost(index, abs(start-end))
+                try system.checkMemberCredits(lenee, cost)
+
+                let contract = Contract(borrower: lenee, startDay: start, endDate: end, cost: cost)
+                system.createContract(index, contract)
+            }
+        } catch MemberParseError.notEnoughtCredits {
+            ContractView().notEnoughtCredits()
+            run = false
+        } catch MemberParseError.userDoesntExist {
+            run = true
+        } catch {
         }
-    } catch MemberParseError.notEnoughtCredits {
-        print("not enought credits")
-    } catch MemberParseError.userDoesntExist {
-    } catch {
     }
 }

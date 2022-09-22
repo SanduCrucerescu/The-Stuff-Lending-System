@@ -37,6 +37,8 @@ func mainMenuActions(console: Console, system: inout System) {
             checkItemTemplate(system: &system, function: removeItem)
         case .createContract:
             createContract(system: &system)
+        case .advanceDay:
+            system.increaseDay()
         case .quit:
             run = false
         }

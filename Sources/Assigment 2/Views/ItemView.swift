@@ -44,14 +44,26 @@ struct ItemView {
         print("Enter item desctiption: ", terminator: "")
         let description = readLine() ?? ""
         print("Enter cost per day: ", terminator: "")
-        let costPerDay = readLine() ?? ""
+        var costPerDay = readLine() ?? ""
+        var status = true
 
-        return Item(owner: owner,
-                    name: name,
-                    description: description,
-                    creationDate: creationDate,
-                    category: category,
-                    costPerDay: Int(costPerDay)!)
+        repeat {
+            do {
+                let item =  try Item(owner: owner,
+                                     name: name,
+                                     description: description,
+                                     creationDate: creationDate,
+                                     category: category,
+                                     costPerDay: costPerDay)
+                status = false
+                return item
+            } catch ItemParseError.costNotANumber {
+                print("-- Please insert a numerical cost --")
+                costPerDay = getNewCostPerDay()
+            } catch {
+                print("Other Error")
+            }
+        } while status
     }
 
     func getItemID() -> String {
@@ -72,16 +84,18 @@ struct ItemView {
         return description
     }
 
-    func getNewCostPerDay() -> Int {
+    func getNewCostPerDay() -> String {
         print("Enter new cost per day name: ", terminator: "")
         let costPerDay = readLine() ?? ""
-        return Int(costPerDay) ?? 0
+        return costPerDay
     }
 
     // MARK: - Items actions
 
     func listITem(_ item: [Item]) {
+        let contracts = item[0].contracts
         print(item.renderTextTable())
+        print(contracts.renderTextTable())
         _ = readLine()
     }
 

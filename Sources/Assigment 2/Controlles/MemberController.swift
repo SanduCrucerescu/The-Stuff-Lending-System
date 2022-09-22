@@ -32,7 +32,7 @@ func doChangeUser(system: inout System, _ email: String) throws {
 
 func checkEmailTemplate(system: inout System, function: (inout System, String) throws -> Void) {
     var memberExists = true
-    var value = MemberView().getMemerEmail()
+    var value = MemberView().getMemberID()
 
     repeat {
         do {
@@ -55,10 +55,10 @@ func checkEmailTemplate(system: inout System, function: (inout System, String) t
     } while memberExists
 }
 
-func removeMember(system: inout System, email: String) throws {
+func removeMember(system: inout System, memberID: String) throws {
     do {
-        _ = try system.checkMemberExists(email)
-        system.removeMember(email)
+        _ = try system.checkMemberExists(memberID)
+        system.removeMember(memberID)
     } catch {
         throw MemberParseError.userDoesntExist
     }
