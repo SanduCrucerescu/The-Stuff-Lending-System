@@ -78,11 +78,15 @@ struct Item: Identifiable, Equatable {
 
 extension Item: TextTableRepresentable {
     static var columnHeaders: [String] {
-        ["ID","Name", "Description", "Category", "Cost Per Day", "Contract"]
+        ["ID", "Name", "Description", "Category", "Cost Per Day", "Contract", "Is Avalible"]
     }
 
     var tableValues: [CustomStringConvertible] {
-        [id, name, description, String(describing: category), costPerDay, contracts]
+        var isAvalible = true
+//        for contract in contracts {
+//
+//        }
+        return [id, name, description, String(describing: category), costPerDay, contracts, isAvalible]
     }
 
     static var tableHeader: String? {

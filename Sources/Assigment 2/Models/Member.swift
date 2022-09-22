@@ -12,6 +12,7 @@ enum MemberParseError: Error {
     case usedEmail
     case usedPhoneNumber
     case userDoesntExist
+    case notEnoughtCredits
 }
 
 struct Member: Identifiable {
@@ -33,10 +34,6 @@ struct Member: Identifiable {
         self.ownedItems = ownedItems
         self.credits = credits
     }
-
-//    mutating func addItem(_ item: Item) {
-//        ownedItems.append(item)
-//    }
 
     var newName: String {
         get { return name }

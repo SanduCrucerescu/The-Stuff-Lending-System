@@ -60,6 +60,12 @@ struct System {
         }
     }
 
+    func checkMemberCredits(_ member: Member, _ credits: Int) throws {
+        guard member.newCredits < credits else {
+            throw MemberParseError.notEnoughtCredits
+        }
+    }
+
     // MARK: - Items functions
 
     mutating func createItem(_ owner: Member, _ item: Item) {
@@ -119,26 +125,25 @@ struct System {
             items.remove(at: itemIndex)
         }
     }
+
+    func calculateCost(_ itemID: String, _ days: Int) -> Int {
+        if let index = items.firstIndex(where: {$0.id == itemID}) {
+            return items[index].costPerDay * days
+        }
+        return 0
+    }
+
     // MARK: - Contract functions
 
     func checkItemFree(_ itemID: String, _ startDay: Int, _ endDay: Int) -> Bool {
-//        if let index = items.firstIndex(where: {$0.id == itemID}) {
-//            for contract in items[index].contracts {
-////                if contract.startDay <= startDay && endDay >= contract.endDate  {
-////                    return false
-////                }
-//                let iRange = contract.startDay ... contract.endDate
-//                let dRange = startDay ... endDay
-//                return iRange.overlaps(dRange)
-//            }
-//        }
-//        return true
-        let s = 1
-        let e = 3
-        let iRange = s...e
-        let dRange = startDay..<endDay
-        let status = iRange.overlaps(dRange) || s == startDay ? true : false
-        return status
+        if let index = items.firstIndex(where: {$0.id == itemID}) {
+            for contract in items[index].contracts {
+                let contractRange = contract.startDay ... contract.endDate
+                let newContractRange = startDay ... endDay
+                return contractRange.overlaps(newContractRange) || contract.startDay == startDay ? false : true
+            }
+        }
+        return true
     }
 
     mutating func createContract(_ itemID: String, _ contract: Contract) {
@@ -147,5 +152,3 @@ struct System {
         }
     }
 }
-
-

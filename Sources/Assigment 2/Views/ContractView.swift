@@ -32,8 +32,4 @@ struct ContractView {
         let email = readLine() ?? ""
         return email
     }
-
-    func createContract(_ startDay: Int, _ endDay: Int, _ lentee: Member)  {
-        
-    }
 }
