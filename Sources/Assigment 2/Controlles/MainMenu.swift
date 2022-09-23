@@ -31,8 +31,8 @@ func mainMenuActions(console: Console, system: inout System) {
         case .changeItem:
             checkItemTemplate(system: &system, function: doChangeItem)
         case .listItem:
-//            let itemID = ItemView().getItemID()
-            ItemView().listItems(system.items)
+            let itemID = ItemView().listItems(system.items)
+            checkItemTemplate(system: &system, function: printItem, itemID: itemID)
         case .deleteItem:
             checkItemTemplate(system: &system, function: removeItem)
         case .createContract:

@@ -41,22 +41,21 @@ func doChangeItem(itemID: String, system: inout System) throws {
     }
 }
 
-func checkItemTemplate(system: inout System, function: (String, inout System) throws -> Void) {
+func checkItemTemplate(system: inout System, function: (String, inout System) throws -> Void, itemID: String?=nil) {
     var run = true
-    var itemID = ItemView().getItemID()
+    var itemID = itemID ?? ItemView().getItemID()
 
     while run {
         do {
+            guard itemID != "q" else {
+                return run = false
+            }
             _ = try system.checkItemExists(itemID)
 
             try function(itemID, &system)
             run = false
         } catch ItemParseError.itemDosentExists {
             itemID = ItemView().getItemID()
-            guard itemID != "q" || itemID != "Q" else {
-                run = false
-                return
-            }
             run = true
         } catch {
         }
@@ -70,16 +69,23 @@ func removeItem(_ itemID: String, _ system: inout System) throws {
 func changeCostPerDay(_ itemID: String, _ system: inout System) {
     var newCostPerDay = ItemView().getNewCostPerDay()
     var run = true
+
     while run {
         do {
+            guard newCostPerDay != "q" else {
+                return run = false
+            }
+            
             try system.changeItemCostPerDay(itemID, newCostPerDay)
             run = false
         } catch ItemParseError.costNotANumber {
             newCostPerDay = ItemView().wrongCostPerDay()
-            guard newCostPerDay != "q" else {
-                return run = false
-            }
             run = true
         } catch {}
     }
+}
+
+func printItem(_ itemID: String, _ system: inout System) {
+    let item = system.getItem(itemID)
+    ItemView().listItem(item)
 }

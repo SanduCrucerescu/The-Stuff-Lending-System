@@ -8,8 +8,8 @@
 import Foundation
 
 func createContract(system: inout System) {
-    ItemView().listItems(system.items)
-    let index = ContractView().getItemID()
+    let index = ItemView().listItems(system.items)
+//    let index = ContractView().getItemID()
     let start = ContractView().getStartDay()
     let end = ContractView().getEndDay()
     var run = true

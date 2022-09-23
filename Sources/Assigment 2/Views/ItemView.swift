@@ -98,7 +98,7 @@ struct ItemView {
 
     // MARK: - Items actions
 
-    func listITem(_ item: [Item]) {
+    func listItem(_ item: [Item]) {
         let contracts = item[0].contracts
         print(item.renderTextTable())
         print(contracts.renderTextTable())
@@ -107,8 +107,8 @@ struct ItemView {
 
     func listItems(_ items: [Item]) -> String {
         print(items.renderTextTable())
-        print("Enter itemID to see full information | q -exit: ", terminator: "")
-        let itemID = readLine()
+        print("Enter itemID | q -exit: ", terminator: "")
+        let itemID = readLine() ?? ""
         return itemID
     }
 
