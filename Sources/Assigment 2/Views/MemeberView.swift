@@ -93,8 +93,7 @@ struct MemberView {
             } catch MemberParseError.notAPhoneNuber {
                 print("-- Please insert a numerical phone number --")
                 phoneNumber = reenterPhoneNumber()
-            }
-            catch {
+            } catch {
                 print("Other Error")
                 return nil
             }
@@ -118,12 +117,12 @@ struct MemberView {
 
     func listMembers(_ members: [Member] ) {
         print(members.renderTextTable())
-        readLine()
+        _ = readLine()
     }
 
     func listMember(_ member: [Member]) {
         print(member.renderTextTable())
-        readLine()
+        _ = readLine()
     }
 
     func changeUserInformation() -> Actions {

@@ -8,19 +8,39 @@
 import Foundation
 import SwiftyTextTable
 
+enum ContractParseError: Error {
+    case invalidStartDay
+    case startDayNotANumber
+    case invalidEndDay
+    case endDayNotANumber
+}
+
 struct Contract: Identifiable {
     private(set) var id = UUID().uuidString
-    private(set) var borrower: Member
-    private(set) var startDay: Int
-    private(set) var endDate: Int
-    private(set) var cost: Int
+    private(set) var borrower: Member?
+    private(set) var startDay: Int?
+    private(set) var endDay: Int?
+    private(set) var cost: Int?
 
-    init(id: String = UUID().uuidString, borrower: Member, startDay: Int, endDate: Int, cost: Int) {
-        self.id = id
-        self.borrower = borrower
-        self.startDay = startDay
-        self.endDate = endDate
-        self.cost = cost
+    func checkStartDay(_ day: Int, _ startDay: String) throws -> Int {
+        guard startDay.isNumber else {
+            throw ContractParseError.startDayNotANumber
+        }
+        guard day <= Int(startDay)! else {
+            throw ContractParseError.invalidStartDay
+        }
+        return Int(startDay) ?? 0
+    }
+
+    func checkEndDay(_ startDay: Int, _ endDay: String) throws -> Int {
+        guard endDay.isNumber else {
+            throw ContractParseError.endDayNotANumber
+        }
+
+        guard startDay < Int(endDay)! else {
+            throw ContractParseError.invalidEndDay
+        }
+        return Int(endDay) ?? 0
     }
 }
 
@@ -30,7 +50,7 @@ extension Contract: TextTableRepresentable {
     }
 
     var tableValues: [CustomStringConvertible] {
-        [borrower.id, startDay, endDate, cost]
+        [borrower!.id, startDay!, endDay!, cost!]
     }
 
     static var tableHeader: String? {

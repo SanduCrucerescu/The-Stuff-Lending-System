@@ -82,15 +82,6 @@ struct Item: Identifiable, Equatable {
         contracts.append(contract)
     }
 }
-extension Item {
-    private static func checkCost (_ costPerDay: String) throws -> Int {
-        guard costPerDay.isNumber else {
-            throw ItemParseError.costNotANumber
-        }
-        return Int(costPerDay) ?? 0
-    }
-}
-
 
 extension Item: TextTableRepresentable {
     static var columnHeaders: [String] {
@@ -103,5 +94,12 @@ extension Item: TextTableRepresentable {
 
     static var tableHeader: String? {
         return "Items in store"
+    }
+
+    private static func checkCost (_ costPerDay: String) throws -> Int {
+        guard costPerDay.isNumber else {
+            throw ItemParseError.costNotANumber
+        }
+        return Int(costPerDay) ?? 0
     }
 }

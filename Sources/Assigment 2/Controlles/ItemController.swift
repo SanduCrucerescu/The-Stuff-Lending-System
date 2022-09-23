@@ -75,7 +75,6 @@ func changeCostPerDay(_ itemID: String, _ system: inout System) {
             guard newCostPerDay != "q" else {
                 return run = false
             }
-            
             try system.changeItemCostPerDay(itemID, newCostPerDay)
             run = false
         } catch ItemParseError.costNotANumber {

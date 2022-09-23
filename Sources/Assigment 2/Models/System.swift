@@ -17,7 +17,7 @@ struct System {
         day += 1
         for (index, item) in items.enumerated() {
             for contract in item.contracts {
-                if contract.endDate < day || contract.startDay > day {
+                if contract.endDay! < day || contract.startDay! > day {
                     items[index].newStatus = true
                 } else {
                     items[index].newStatus = false
@@ -153,7 +153,7 @@ struct System {
     func checkItemFree(_ itemID: String, _ startDay: Int, _ endDay: Int) -> Bool {
         if let index = items.firstIndex(where: {$0.id == itemID}) {
             for contract in items[index].contracts {
-                let contractRange = contract.startDay ... contract.endDate
+                let contractRange = contract.startDay! ... contract.endDay!
                 let newContractRange = startDay ... endDay
                 return contractRange.overlaps(newContractRange) || contract.startDay == startDay ? false : true
             }

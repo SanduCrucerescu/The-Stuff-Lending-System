@@ -15,22 +15,34 @@ struct ContractView {
         return itemIndex
     }
 
-    func getStartDay() -> Int {
+    func getStartDay() -> String {
         print("Enter start day to rent: ", terminator: "")
         let startDay = readLine() ?? ""
-        return Int(startDay) ?? 0
+        return startDay
     }
 
-    func getEndDay() -> Int {
+    func getEndDay() -> String {
         print("Enter end day: ", terminator: "")
         let endDay = readLine() ?? ""
-        return Int(endDay) ?? 0
+        return endDay
     }
 
     func getRentee() -> String {
         print("Enter rentee email | q - exit: ", terminator: "")
         let email = readLine() ?? ""
         return email
+    }
+
+    func invalidStardDay(_ error: String) -> String {
+        print("Invalid start day \(error) | q - exit: ", terminator: "")
+        let value = readLine() ?? ""
+        return value
+    }
+
+    func invalidEndDay(_ error: String) -> String {
+        print("Invalid end day \(error) | q - exit: ", terminator: "")
+        let value = readLine() ?? ""
+        return value
     }
 
     func notEnoughtCredits() {

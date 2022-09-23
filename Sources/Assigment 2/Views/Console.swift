@@ -67,7 +67,6 @@ struct Console {
         } else if choice == "11" {
             return Actions.advanceDay
         }
-
         return Actions.quit
     }
 }
