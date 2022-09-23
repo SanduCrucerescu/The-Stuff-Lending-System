@@ -58,7 +58,6 @@ struct ItemView {
                 status = false
                 return item
             } catch ItemParseError.costNotANumber {
-                print("-- Please insert a numerical cost --")
                 costPerDay = getNewCostPerDay()
             } catch {
                 print("Other Error")
@@ -90,6 +89,13 @@ struct ItemView {
         return costPerDay
     }
 
+    func wrongCostPerDay() -> String {
+        print("-- Please insert a numerical cost --")
+        print("Enter new cost per day name | q- exit: ", terminator: "")
+        let costPerDay = readLine() ?? ""
+        return costPerDay
+    }
+
     // MARK: - Items actions
 
     func listITem(_ item: [Item]) {
@@ -99,9 +105,11 @@ struct ItemView {
         _ = readLine()
     }
 
-    func listItems(_ items: [Item]) {
+    func listItems(_ items: [Item]) -> String {
         print(items.renderTextTable())
-        _ = readLine()
+        print("Enter itemID to see full information | q -exit: ", terminator: "")
+        let itemID = readLine()
+        return itemID
     }
 
     func changeItemInformation() -> Actions {

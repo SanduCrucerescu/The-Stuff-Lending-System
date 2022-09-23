@@ -21,46 +21,36 @@ func createItem(system: inout System, email: String) throws {
     }
 }
 
-func doChangeItem(ownerEmail: String, itemID: String, system: inout System) throws {
+func doChangeItem(itemID: String, system: inout System) throws {
     var choice = ItemView().changeItemInformation()
 
     switch choice {
     case .name:
         let newItemName = ItemView().getNewName()
-        system.changeItemName(ownerEmail, itemID, newItemName)
+        system.changeItemName(itemID, newItemName)
     case .description:
         let newDescription = ItemView().getNewDescription()
-        system.changeItemDescription(ownerEmail, itemID, newDescription)
+        system.changeItemDescription(itemID, newDescription)
     case .category:
         let newCategory = ItemView().getCategory()
-        system.chanageItemCategory(ownerEmail, itemID, newCategory)
+        system.chanageItemCategory(itemID, newCategory)
     case .costPerDay:
-        let newCostPerDay = ItemView().getNewCostPerDay()
-        try? system.changeItemCostPerDay(ownerEmail, itemID, newCostPerDay) // TODO: - fix this catch
+        changeCostPerDay(itemID, &system)
     case .back:
         choice = ItemView.Actions.back
     }
 }
 
-func checkItemTemplate(system: inout System, function: (String, String, inout System) throws -> Void) {
+func checkItemTemplate(system: inout System, function: (String, inout System) throws -> Void) {
     var run = true
-    var ownerEmail = MemberView().getMemerEmail()
     var itemID = ItemView().getItemID()
 
     while run {
         do {
-            _ = try system.checkMemberExists(ownerEmail)
-            _ = try system.checkItemExists(ownerEmail, itemID)
+            _ = try system.checkItemExists(itemID)
 
-            try function(ownerEmail, itemID, &system)
+            try function(itemID, &system)
             run = false
-        } catch MemberParseError.userDoesntExist {
-            ownerEmail = MemberView().memberDosentExist()
-            guard ownerEmail != "q" || ownerEmail != "Q" else {
-                run = false
-                return
-            }
-            run = true
         } catch ItemParseError.itemDosentExists {
             itemID = ItemView().getItemID()
             guard itemID != "q" || itemID != "Q" else {
@@ -73,6 +63,23 @@ func checkItemTemplate(system: inout System, function: (String, String, inout Sy
     }
 }
 
-func removeItem(_ ownerEmail: String, _ itemID: String, _ system: inout System) throws {
-    system.removeItem(ownerEmail, itemID)
+func removeItem(_ itemID: String, _ system: inout System) throws {
+    system.removeItem(itemID)
+}
+
+func changeCostPerDay(_ itemID: String, _ system: inout System) {
+    var newCostPerDay = ItemView().getNewCostPerDay()
+    var run = true
+    while run {
+        do {
+            try system.changeItemCostPerDay(itemID, newCostPerDay)
+            run = false
+        } catch ItemParseError.costNotANumber {
+            newCostPerDay = ItemView().wrongCostPerDay()
+            guard newCostPerDay != "q" else {
+                return run = false
+            }
+            run = true
+        } catch {}
+    }
 }

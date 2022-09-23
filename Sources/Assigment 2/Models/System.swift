@@ -36,8 +36,8 @@ struct System {
         members.removeAll(where: {$0.id == memberID})
     }
 
-    func getMember (_ email: String) throws -> Member {
-        let member = members.first(where: {$0.email == email})
+    func getMember (_ memberID: String) throws -> Member {
+        let member = members.first(where: {$0.id == memberID})
 
         guard member != nil else {
             throw MemberParseError.userDoesntExist
@@ -46,8 +46,8 @@ struct System {
         return member!
     }
 
-    func checkMemberExists (_ email: String) throws -> Bool {
-        guard members.contains(where: {$0.email == email}) else {
+    func checkMemberExists (_ memberID: String) throws -> Bool {
+        guard members.contains(where: {$0.id == memberID}) else {
             throw MemberParseError.userDoesntExist
         }
         return true
@@ -98,7 +98,7 @@ struct System {
         return itemPrint
     }
 
-    func checkItemExists(_ ownerEmail: String, _ itemID: String) throws -> Bool {
+    func checkItemExists(_ itemID: String) throws -> Bool {
 
         guard items.contains(where: {$0.id == itemID}) else {
             throw ItemParseError.itemDosentExists
@@ -107,25 +107,25 @@ struct System {
         return true
     }
 
-    mutating func changeItemName(_ ownerEmail: String, _ itemID: String, _ newName: String) {
+    mutating func changeItemName(_ itemID: String, _ newName: String) {
         if let itemIndex = items.firstIndex(where: {$0.id == itemID}) {
             items[itemIndex].newName = newName
         }
     }
 
-    mutating func changeItemDescription(_ ownerEmail: String, _ itemID: String, _ newDescription: String) {
+    mutating func changeItemDescription(_ itemID: String, _ newDescription: String) {
         if let itemIndex = items.firstIndex(where: {$0.id == itemID}) {
             items[itemIndex].newDescription = newDescription
         }
     }
 
-    mutating func chanageItemCategory(_ ownerEmail: String, _ itemID: String, _ newCategory: Item.Category) {
+    mutating func chanageItemCategory(_ itemID: String, _ newCategory: Item.Category) {
         if let itemIndex = items.firstIndex(where: {$0.id == itemID}) {
             items[itemIndex].newCategory = newCategory
         }
     }
 
-    mutating func changeItemCostPerDay(_ ownerEmail: String, _ itemID: String, _ newItemCostPerDay: String) throws {
+    mutating func changeItemCostPerDay(_ itemID: String, _ newItemCostPerDay: String) throws {
         if let itemIndex = items.firstIndex(where: {$0.id == itemID}) {
             guard newItemCostPerDay.isNumber else {
                 throw ItemParseError.costNotANumber
@@ -135,7 +135,7 @@ struct System {
 
     }
 
-    mutating func removeItem(_ ownerEmail: String, _ itemID: String) {
+    mutating func removeItem(_ itemID: String) {
         if let itemIndex = items.firstIndex(where: {$0.id == itemID}) {
             items.remove(at: itemIndex)
         }

@@ -83,10 +83,10 @@ extension Member {
 
 extension Member: TextTableRepresentable {
     static var columnHeaders: [String] {
-        ["Name", "Email", "Phone Number", "Credits", "Owned Items"]
+        ["ID", "Name", "Email", "Phone Number", "Credits", "Owned Items"]
     }
 
     var tableValues: [CustomStringConvertible] {
-        [name, email, phoneNumber, credits, ownedItems]
+        [id, name, email, phoneNumber, credits, ownedItems]
     }
 }

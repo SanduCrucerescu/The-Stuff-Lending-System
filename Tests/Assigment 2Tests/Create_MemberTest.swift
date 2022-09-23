@@ -38,8 +38,6 @@ final class CreateMember: XCTestCase {
         let john = try? Member(name: "Allan",
                               email: "allan@enigma.com",
                               mobilePhone: "123456",
-                              ownedItems: 0,
-                              credits: 0,
                               members: [])
 
         XCTAssertEqual(john?.id.count, 6)
@@ -50,16 +48,12 @@ final class CreateMember: XCTestCase {
             let allan = try Member(name: "Allan",
                                   email: "allan@enigma.com",
                                   mobilePhone: "123456",
-                                  ownedItems: 0,
-                                  credits: 0,
                                   members: self.system.members)
             self.system.addNewMember(allan)
 
             let turing = try Member(name: "Turing",
                                   email: "allan@enigma.com",
                                   mobilePhone: "123",
-                                  ownedItems: 0,
-                                  credits: 0,
                                   members: self.system.members)
 
             self.system.addNewMember(turing)
@@ -67,8 +61,6 @@ final class CreateMember: XCTestCase {
             let turing2 = try  Member(name: "Turing",
                                       email: "allan@enigma.com",
                                       mobilePhone: "123456",
-                                      ownedItems: 0,
-                                      credits: 0,
                                       members: self.system.members)
 
             self.system.addNewMember(turing2)

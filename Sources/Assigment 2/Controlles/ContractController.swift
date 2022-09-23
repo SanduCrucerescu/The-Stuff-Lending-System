@@ -28,7 +28,7 @@ func createContract(system: inout System) {
             if free {
                 lenteeEmail = ContractView().getRentee()
                 
-                guard index != "q" else {
+                guard lenteeEmail != "q" else {
                     run = false
                     return
                 }
