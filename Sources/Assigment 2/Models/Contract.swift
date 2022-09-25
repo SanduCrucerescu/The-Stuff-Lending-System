@@ -17,7 +17,7 @@ enum ContractParseError: Error {
 
 struct Contract: Identifiable {
     private(set) var id = UUID().uuidString
-    private(set) var borrower: Member?
+    private(set) var lendee: Member?
     private(set) var startDay: Int?
     private(set) var endDay: Int?
     private(set) var cost: Int?
@@ -46,11 +46,11 @@ struct Contract: Identifiable {
 
 extension Contract: TextTableRepresentable {
     static var columnHeaders: [String] {
-        ["Borrower ID", "Start Day", "End Day", "Cost"]
+        ["Lendee ID", "Start Day", "End Day", "Cost"]
     }
 
     var tableValues: [CustomStringConvertible] {
-        [borrower!.id, startDay!, endDay!, cost!]
+        [lendee!.id, startDay!, endDay!, cost!]
     }
 
     static var tableHeader: String? {

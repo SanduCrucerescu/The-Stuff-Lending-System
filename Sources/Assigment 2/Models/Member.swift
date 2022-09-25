@@ -16,7 +16,7 @@ enum MemberParseError: Error {
     case notEnoughtCredits
 }
 
-struct Member: Identifiable {
+struct Member: Identifiable, Equatable {
     private(set) var id = UUID().uuidString.prefix(6)
     private(set) var name: String
     private(set) var email: String

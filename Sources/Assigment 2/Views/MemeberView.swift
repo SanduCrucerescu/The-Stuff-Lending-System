@@ -125,6 +125,28 @@ struct MemberView {
         _ = readLine()
     }
 
+    func listVerbose(_ members: [Member], _ items: [Item], _ day: Int) {
+        for member in members {
+            print("\nName: \(member.name)")
+            print("Email: \(member.email)")
+            print("Items: ")
+            for item in items where item.owner.id == member.id {
+                print("\t\nName: \(item.name)")
+                print("\tDescription: \(item.description)")
+                print("\tCategory: \(item.category)")
+                print("\tCost per day: \(item.costPerDay)")
+                for contract in item.contracts {
+                    let dayRange = contract.startDay!...contract.endDay!
+                    if dayRange.contains(day) {
+                        print("Lendee: \(contract.lendee!.name)")
+                        print("Start day: \(String(describing: contract.startDay))")
+                        print("End day: \(String(describing: contract.endDay))")
+                    }
+                }
+            }
+        }
+    }
+    
     func changeUserInformation() -> Actions {
         print("\n1. Name")
         print("2. Email")

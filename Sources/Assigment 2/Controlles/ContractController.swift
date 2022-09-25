@@ -34,14 +34,14 @@ func createContract(system: inout System) {
                     return
                 }
 
-                let lenee = try system.getMember(lenteeEmail)
+                let lendee = try system.getMember(lenteeEmail)
                 let cost = system.calculateCost(index, abs(startDayInt-endDayInt))
-                try system.checkMemberCredits(lenee, cost)
+                try system.checkMemberCredits(lendee, cost)
 
-                let contract = Contract(borrower: lenee,
-                                            startDay: startDayInt,
-                                            endDay: endDayInt,
-                                            cost: cost)
+                let contract = Contract(lendee: lendee,
+                                        startDay: startDayInt,
+                                        endDay: endDayInt,
+                                        cost: cost)
                 system.createContract(index, contract)
             }
         } catch MemberParseError.notEnoughtCredits {
