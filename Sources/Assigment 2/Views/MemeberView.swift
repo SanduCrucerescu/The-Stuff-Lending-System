@@ -10,10 +10,50 @@ import SwiftyTextTable
 
 struct MemberView {
     enum Actions {
+        case addMember
+        case removeMemeber
+        case listMembers
+        case listMember
+        case verbose
+        case changeMember
+        case back
+    }
+
+    enum ChangeMemberActions {
         case name
         case email
         case phoneNumber
         case back
+    }
+
+    func memberMenu() -> Actions {
+        print("1 - Add new member")
+        print("2 - Remove member")
+        print("3 - Change a member's information")
+        print("4 - Look at a specific members full information")
+        print("5 - List Members")
+        print("6 - Print Verbose")
+        print("q - back")
+        print("\nPlease select a function: ", terminator: "")
+        let choice: String = readLine() ?? ""
+
+        if choice == "q" || choice == "Q" {
+            return Actions.back
+        } else if choice == "1" {
+            return Actions.addMember
+        } else if choice == "2" {
+            return Actions.removeMemeber
+        } else if choice == "3" {
+            return Actions.changeMember
+        } else if choice == "4" {
+            return Actions.listMember
+        } else if choice == "5" {
+            return Actions.listMembers
+        } else if choice == "12" {
+            return Actions.verbose
+        }
+
+        return Actions.back
     }
 
     // MARK: - Getting the data for the user
@@ -146,8 +186,8 @@ struct MemberView {
             }
         }
     }
-    
-    func changeUserInformation() -> Actions {
+
+    func changeUserInformation() -> ChangeMemberActions {
         print("\n1. Name")
         print("2. Email")
         print("3. Phone Number")
@@ -155,12 +195,12 @@ struct MemberView {
         print("What do you want to change?: ", terminator: "")
         let choice = readLine()
         if choice == "1" {
-            return Actions.name
+            return ChangeMemberActions.name
         } else if choice == "2" {
-            return Actions.email
+            return ChangeMemberActions.email
         } else if choice == "3" {
-            return Actions.phoneNumber
+            return ChangeMemberActions.phoneNumber
         }
-        return Actions.back
+        return ChangeMemberActions.back
     }
 }

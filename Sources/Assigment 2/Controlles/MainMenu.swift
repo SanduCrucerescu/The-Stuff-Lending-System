@@ -14,43 +14,12 @@ func mainMenuActions(console: Console, system: inout System) {
         let action: Console.Actions = console.mainMenu()
 
         switch action {
-        case .addMember:
-            if let member = MemberView().createNewMember(system.members) {
-                system.addNewMember(member)
-            }
-        case .removeMemeber:
-            checkEmailTemplate(system: &system,
-                               function: removeMember)
-        case .listMembers:
-            MemberView().listMembers(system.members)
-        case .listMember:
-            checkEmailTemplate(system: &system,
-                               function: listMember)
-        case .changeMember:
-            checkEmailTemplate(system: &system,
-                               function: doChangeUser)
-        case .createItem:
-            checkEmailTemplate(system: &system,
-                               function: createItem)
-        case .changeItem:
-            checkItemTemplate(system: &system,
-                              function: doChangeItem)
-        case .listItem:
-            let itemID = ItemView().listItems(system.items)
-            checkItemTemplate(system: &system,
-                              function: printItem,
-                              itemID: itemID)
-        case .deleteItem:
-            checkItemTemplate(system: &system,
-                              function: removeItem)
-        case .createContract:
-            createContract(system: &system)
+        case .member:
+            memberMenuActions(system: &system)
+        case .item:
+            itemMenuActions(system: &system)
         case .advanceDay:
             system.increaseDay()
-        case .verbose:
-            MemberView().listVerbose(system.members,
-                                     system.items,
-                                     system.day)
         case .quit:
             run = false
         }

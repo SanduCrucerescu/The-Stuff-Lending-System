@@ -13,7 +13,6 @@ struct System {
     private(set) var members: [Member] = []
     private(set) var items: [Item] = []
 
-
     mutating func increaseDay() {
         day += 1
         for (index, item) in items.enumerated() {
@@ -75,16 +74,6 @@ struct System {
     func checkMemberCredits(_ member: Member, _ credits: Int) throws {
         guard !(member.newCredits < credits) else {
             throw MemberParseError.notEnoughtCredits
-        }
-    }
-
-    func getMembersVerbose() {
-        for member in members {
-            for item in items {
-                if member.id == item.owner.id {
-                    
-                }
-            }
         }
     }
 

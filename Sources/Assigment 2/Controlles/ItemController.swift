@@ -7,6 +7,37 @@
 
 import Foundation
 
+func itemMenuActions(system: inout System) {
+    var run = true
+
+    while run {
+        let action: ItemView.Actions = ItemView().itemMenu()
+
+        switch action {
+
+        case .createItem:
+            checkEmailTemplate(system: &system,
+                               function: createItem)
+        case .changeItem:
+            checkItemTemplate(system: &system,
+                              function: doChangeItem)
+        case .listItem:
+            let itemID = ItemView().listItems(system.items)
+            checkItemTemplate(system: &system,
+                              function: printItem,
+                              itemID: itemID)
+        case .deleteItem:
+            checkItemTemplate(system: &system,
+                              function: removeItem)
+        case .createContract:
+            createContract(system: &system)
+        case .back:
+            run = false
+        }
+
+    }
+}
+
 func createItem(system: inout System, email: String) throws {
     do {
         var owner = try system.getMember(email)
@@ -37,7 +68,7 @@ func doChangeItem(itemID: String, system: inout System) throws {
     case .costPerDay:
         changeCostPerDay(itemID, &system)
     case .back:
-        choice = ItemView.Actions.back
+        choice = ItemView.ChangeItemActions.back
     }
 }
 

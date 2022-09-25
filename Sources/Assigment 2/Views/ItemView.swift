@@ -10,11 +10,46 @@ import Foundation
 struct ItemView {
 
     enum Actions {
+        case createItem
+        case changeItem
+        case listItem
+        case deleteItem
+        case createContract
+        case back
+    }
+
+    enum ChangeItemActions {
         case name
         case description
         case category
         case costPerDay
         case back
+    }
+
+    func itemMenu() -> Actions {
+        print("1 - Create Item for member")
+        print("2 - Change item information")
+        print("3 - List Item")
+        print("4 - Delete Item")
+        print("5 - Create new contract")
+        print("q - back")
+        print("\nPlease select a function: ", terminator: "") //
+
+        let choice: String = readLine() ?? ""
+        if choice == "q" || choice == "Q" {
+            return Actions.back
+        } else if choice == "1" {
+            return Actions.createItem
+        } else if choice == "2" {
+            return Actions.changeItem
+        } else if choice == "3" {
+            return Actions.listItem
+        } else if choice == "4" {
+            return Actions.deleteItem
+        } else if choice == "5" {
+            return Actions.createContract
+        }
+        return Actions.back
     }
 
     func getCategory() -> Item.Category {
@@ -112,7 +147,7 @@ struct ItemView {
         return itemID
     }
 
-    func changeItemInformation() -> Actions {
+    func changeItemInformation() -> ChangeItemActions {
         print("1. Name")
         print("2. Description")
         print("3. Category")
@@ -121,15 +156,15 @@ struct ItemView {
         let choise = readLine() ?? ""
 
         if choise == "1" {
-            return Actions.name
+            return ChangeItemActions.name
         } else if choise == "2" {
-            return Actions.description
+            return ChangeItemActions.description
         } else if choise == "3" {
-            return Actions.category
+            return ChangeItemActions.category
         } else if choise == "4" {
-            return Actions.costPerDay
+            return ChangeItemActions.costPerDay
         }
 
-        return Actions.back
+        return ChangeItemActions.back
     }
 }

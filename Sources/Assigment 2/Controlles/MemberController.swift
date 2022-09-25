@@ -7,6 +7,38 @@
 
 import Foundation
 
+func memberMenuActions(system: inout System) {
+    var run = true
+
+    while run {
+        let action: MemberView.Actions = MemberView().memberMenu()
+
+        switch action {
+        case .addMember:
+            if let member = MemberView().createNewMember(system.members) {
+                system.addNewMember(member)
+            }
+        case .removeMemeber:
+            checkEmailTemplate(system: &system,
+                               function: removeMember)
+        case .listMembers:
+            MemberView().listMembers(system.members)
+        case .listMember:
+            checkEmailTemplate(system: &system,
+                               function: listMember)
+        case .verbose:
+            MemberView().listVerbose(system.members,
+                                     system.items,
+                                     system.day)
+        case .changeMember:
+            checkEmailTemplate(system: &system,
+                               function: doChangeUser)
+        case .back:
+            run = false
+        }
+    }
+}
+
 func doChangeUser(system: inout System, _ email: String) throws {
     let userExists = try? system.checkMemberExists(email)
 
@@ -26,7 +58,7 @@ func doChangeUser(system: inout System, _ email: String) throws {
         let phoneNumber = MemberView().reenterPhoneNumber()
         system.changePhoneNumber(email, phoneNumber)
     case .back:
-        choice = MemberView.Actions.back
+        choice = MemberView.ChangeMemberActions.back
     }
 }
 
