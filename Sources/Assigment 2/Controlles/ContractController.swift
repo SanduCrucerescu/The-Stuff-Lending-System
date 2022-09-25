@@ -12,14 +12,10 @@ func createContract(system: inout System) {
     var startDay = ContractView().getStartDay()
     var endDay = ContractView().getEndDay()
     var run = true
-    var lenteeEmail = ""
 
     while run {
         do {
-            guard index != "q" else {
-                run = false
-                return
-            }
+            run = exitLoop(index)
 
             let startDayInt = try Contract().checkStartDay(system.day, startDay)
             let endDayInt = try Contract().checkEndDay(startDayInt, endDay)
@@ -27,12 +23,8 @@ func createContract(system: inout System) {
             run = false
 
             if free {
-                lenteeEmail = ContractView().getRentee()
-
-                guard lenteeEmail != "q" else {
-                    run = false
-                    return
-                }
+                let lenteeEmail = ContractView().getRentee()
+                run = exitLoop(lenteeEmail)
 
                 let lendee = try system.getMember(lenteeEmail)
                 let cost = system.calculateCost(index, abs(startDayInt-endDayInt))
@@ -63,4 +55,11 @@ func createContract(system: inout System) {
             run = false
         } catch {}
     }
+}
+
+func exitLoop(_ string: String) -> Bool {
+    guard string != "q" else {
+        return false
+    }
+    return true
 }
