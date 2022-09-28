@@ -1,0 +1,203 @@
+@startuml
+skinparam classAttributeIconSize 0
+' STYLE START
+
+skinparam shadowing false
+' STYLE END
+
+
+class "ContractParseError" as ContractParseError << (E, LightSteelBlue) enum >> { 
+  invalidStartDay
+  startDayNotANumber
+  invalidEndDay
+  endDayNotANumber 
+}
+
+class "ItemParseError" as ItemParseError << (E, LightSteelBlue) enum >> { 
+  itemDosentExists
+  costNotANumber 
+}
+
+class "MemberParseError" as MemberParseError << (E, LightSteelBlue) enum >> { 
+  usedEmail
+  usedPhoneNumber
+  notAPhoneNuber
+  userDoesntExist
+  notEnoughtCredits 
+}
+
+class "Contract" as Contract << (S, SkyBlue) struct >> { 
+  -id
+  -lendee : Member?
+  -startDay : Int?
+  -endDay : Int?
+  -cost : Int?
+  +checkStartDay(_:_:)
+  +checkEndDay(_:_:) 
+}
+class "Item" as Item << (S, SkyBlue) struct >> { 
+  -id
+  -owner : Member
+  -name : String
+  -description : String
+  -creationDate : Int
+  -category : Category
+  -costPerDay : Int
+  -isAvalible : Bool
+  -contracts : [Contract]
+  +newName : String
+  +newDescription : String
+  +newCategory : Category
+  +newCostPerDay : Int
+  +newStatus : Bool
+  +addContract(_:) 
+}
+class "Member" as Member << (S, SkyBlue) struct >> { 
+  -id
+  -name : String
+  -email : String
+  -phoneNumber : String
+  -ownedItems : Int
+  -credits : Int
+  +newName : String
+  +newEmail : String
+  +newPhoneNumber : String
+  +newCredits : Int
+  +newOwnedItems : Int 
+}
+
+class "Contract" as Contract0 << (X, Orchid) extension >> { 
+  {static} columnHeaders : [String]
+  tableValues : [CustomStringConvertible]
+  {static} tableHeader : String? 
+}
+
+
+class "Item" as Item0 << (X, Orchid) extension >> { 
+  {static} columnHeaders : [String]
+  tableValues : [CustomStringConvertible]
+  {static} tableHeader : String?
+  -{static} checkCost(_:) 
+}
+
+
+class "Member" as Member0 << (X, Orchid) extension >> { 
+  -{static} checkEmail(_:_:)
+  -{static} checkPhoneNumber(_:_:) 
+}
+class "Member" as Member1 << (X, Orchid) extension >> { 
+  {static} columnHeaders : [String]
+  tableValues : [CustomStringConvertible] 
+}
+
+class "ContractController" as ContractController << (S, SkyBlue) struct >> { 
+  +createContract(system:)
+  +exitLoop(_:) 
+}
+
+class "ItemController" as ItemController << (S, SkyBlue) struct >> { 
+  +itemMenuActions(system:)
+  +createItem(system:email:)
+  +doChangeItem(itemID:system:)
+  +checkItemTemplate(system:function:itemID:)
+  +removeItem(_:_:)
+  +changeCostPerDay(_:_:)
+  +printItem(_:_:) 
+}
+
+class "MemberController" as MemberController << (S, SkyBlue) struct >> { 
+  +memberMenuActions(system:)
+  +doChangeUser(system:_:)
+  +checkEmailTemplate(system:function:)
+  +removeMember(system:memberID:)
+  +listMember(system:email:) 
+}
+
+class "System" as System << (S, SkyBlue) struct >> { 
+  -day : Int
+  -members : [Member]
+  -items : [Item]
+  +increaseDay()
+  +addNewMember(_:)
+  +removeMember(_:)
+  +getMember(_:)
+  +checkMemberExists(_:)
+  +changeName(_:_:)
+  +changeEmail(_:_:)
+  +changePhoneNumber(_:_:)
+  +checkMemberCredits(_:_:)
+  +createItem(_:_:)
+  +getItem(_:)
+  +checkItemExists(_:)
+  +changeItemName(_:_:)
+  +changeItemDescription(_:_:)
+  +chanageItemCategory(_:_:)
+  +changeItemCostPerDay(_:_:)
+  +removeItem(_:)
+  +calculateCost(_:_:)
+  +checkItemFree(_:_:_:)
+  +createContract(_:_:) 
+}
+
+class "ContractView" as ContractView << (S, SkyBlue) struct >> { 
+  +getItemID()
+  +getStartDay()
+  +getEndDay()
+  +getRentee()
+  +invalidStardDay(_:)
+  +invalidEndDay(_:)
+  +notEnoughtCredits() 
+}
+
+class "ItemView" as ItemView << (S, SkyBlue) struct >> { 
+  +itemMenu()
+  +getCategory()
+  +createNewItem(creationDate:category:owner:)
+  +getItemID()
+  +getNewName()
+  +getNewDescription()
+  +getNewCostPerDay()
+  +wrongCostPerDay()
+  +listItem(_:)
+  +listItems(_:)
+  +changeItemInformation() 
+}
+
+class "MemberView" as MemberView << (S, SkyBlue) struct >> { 
+  +memberMenu()
+  +getMemerName()
+  +getMemerEmail()
+  +getMemberPhoneNumber()
+  +reenterName()
+  +reenterEmail()
+  +reenterPhoneNumber()
+  +memberDosentExist()
+  +getMemberID()
+  +createNewMember(_:)
+  +deleteUser()
+  +getMember()
+  +listMembers(_:)
+  +listMember(_:)
+  +listVerbose(_:_:_:)
+  +changeUserInformation() 
+}
+
+class "Console" as Console << (S, SkyBlue) struct >> { 
+  +mainMenu() 
+}
+
+
+Member -[hidden] Item : Owns
+Item -[hidden] Contract : Has
+Member -[hidden] Contract : Lends
+Member <.. Item : Owns
+Item <.. Contract : Has
+Member <.. Contract : Lends
+Member <.. Member0 : ext
+Member <.. Member1 : ext
+Item <.. Item0 : ext
+Contract <.. Contract0 : text
+Error -- MemberParseError : inherits
+Error -- ContractParseError : inherits
+Error -- ItemParseError : inherits
+@enduml
