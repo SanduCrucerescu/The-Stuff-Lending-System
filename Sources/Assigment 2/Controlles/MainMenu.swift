@@ -7,21 +7,23 @@
 
 import Foundation
 
-func mainMenuActions(console: Console, system: inout System) {
-    var run = true
+struct MainMenuController {
+    func mainMenuActions(system: inout System) {
+        var run = true
 
-    while run {
-        let action: Console.Actions = console.mainMenu()
+        while run {
+            let action: Console.Actions = Console().mainMenu()
 
-        switch action {
-        case .member:
-            memberMenuActions(system: &system)
-        case .item:
-            itemMenuActions(system: &system)
-        case .advanceDay:
-            system.increaseDay()
-        case .quit:
-            run = false
+            switch action {
+            case .member:
+                MemberController().memberMenuActions(system: &system)
+            case .item:
+                ItemController().itemMenuActions(system: &system)
+            case .advanceDay:
+                system.increaseDay()
+            case .quit:
+                run = false
+            }
         }
     }
 }

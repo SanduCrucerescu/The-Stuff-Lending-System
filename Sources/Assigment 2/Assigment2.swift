@@ -9,13 +9,6 @@ public struct Assigment2 {
                               mobilePhone: "123456",
                               members: system.members)
         system.addNewMember(allan!)
-        let console = Console()
-        mainMenuActions(console: console, system: &system)
-//        let memberController = MemberController(system: &system)
-//        var mainMenu = MainMenu(console: console,
-//                                system: &system,
-//                                memberController: memberController)
-//
-//        mainMenu.mainMenuActions()
+        MainMenuController().mainMenuActions(system: &system)
     }
 }
