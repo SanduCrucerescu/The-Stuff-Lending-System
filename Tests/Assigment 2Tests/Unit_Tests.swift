@@ -8,7 +8,7 @@
 import XCTest
 @testable import Assigment_2
 
-final class CreateMember: XCTestCase {
+final class UnitTests: XCTestCase {
 //    override func setUpWithError() throws {
 //        // Put setup code here. This method is called before the invocation of each test method in the class.
 //    }
@@ -76,9 +76,64 @@ final class CreateMember: XCTestCase {
         }
     }
 
-//    func test_checkContract() {
-//        let i = self.system.checkItemFree("asa", 4, 5)
-//        Swift.print(i)
-//        XCTAssertTrue(i)
-//    }
+    func test_checkArray() {
+        do {
+            let turing2 = try Member(name: "Turing",
+                                     email: "allan1@enigma.com",
+                                     mobilePhone: "123454",
+                                     members: self.system.members)
+
+            self.system.addNewMember(turing2)
+            let numb = self.system.members.count
+
+            XCTAssertEqual(numb, 3)
+        } catch {}
+    }
+
+    func test_checkItems() {
+        let car =   try? Item(owner: self.system.members[0],
+                           name: "Car",
+                           description: "It's fun to play with",
+                           creationDate: self.system.day,
+                           category: Item.Category.toy,
+                           costPerDay: "50",
+                           items: self.system.items)
+
+        self.system.createItem(self.system.members[0], car!)
+
+        var exists = false
+        for member in self.system.members where member.ownedItems == 2 {
+            exists = true
+        }
+
+        XCTAssertEqual(exists, true)
+    }
+
+    func test_checkItemsNil() {
+        var exists = false
+        for member in self.system.members where member.ownedItems == 0 {
+            exists = true
+        }
+
+        XCTAssertEqual(exists, true)
+    }
+
+    func test_checkContractDay() {
+        let contract = Contract(id: UUID().uuidString,
+                                lendee: self.system.members[1],
+                                startDay: 5,
+                                endDay: 7,
+                                cost: 30)
+        let id = self.system.items.first?.id
+        self.system.createContract(id!, contract)
+
+        var exists = false
+
+        for item in self.system.items {
+            exists = self.system.checkItemFree(item.id, 5, 7)
+        }
+
+        XCTAssertEqual(exists, false)
+
+    }
 }

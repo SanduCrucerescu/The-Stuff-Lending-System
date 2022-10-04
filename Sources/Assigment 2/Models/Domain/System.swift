@@ -108,6 +108,7 @@ struct System {
         if let index = members.firstIndex(where: {$0.id == owner.id}) {
             members[index] = owner
             members[index].newCredits += 100
+            members[index].newOwnedItems += 1
         }
         items.append(item)
     }
