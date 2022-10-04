@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Console {
+struct MainMenuView {
     enum Actions {
         case member
         case item

@@ -12,7 +12,7 @@ struct MainMenuController {
         var run = true
 
         while run {
-            let action: Console.Actions = Console().mainMenu()
+            let action: MainMenuView.Actions = MainMenuView().mainMenu()
 
             switch action {
             case .member:
