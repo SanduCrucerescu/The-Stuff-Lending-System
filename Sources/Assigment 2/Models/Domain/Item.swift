@@ -19,7 +19,7 @@ struct Item: Identifiable, Equatable {
         return val
     }
 
-    enum Category {
+    enum Category: CaseIterable {
         case tool
         case vehicle
         case game
@@ -28,7 +28,7 @@ struct Item: Identifiable, Equatable {
         case other
     }
 
-    private(set) var id = UUID().uuidString.prefix(8)
+    private(set) var id: String
     private(set) var owner: Member
     private(set) var name: String
     private(set) var description: String
@@ -43,7 +43,9 @@ struct Item: Identifiable, Equatable {
          description: String,
          creationDate: Int,
          category: Category,
-         costPerDay: String) throws {
+         costPerDay: String,
+         items: [Item]) throws {
+        self.id = Self.checkID(String(UUID().uuidString.prefix(8)), items)
         self.owner = owner
         self.name = name
         self.description = description
@@ -101,5 +103,17 @@ extension Item: TextTableRepresentable {
             throw ItemParseError.costNotANumber
         }
         return Int(costPerDay) ?? 0
+    }
+
+    private static func checkID(_ id: String, _ items: [Item]) -> String {
+        var newID: String = id
+        while true {
+            guard !items.contains(where: {$0.id == id}) else {
+                newID = String(UUID().uuidString.prefix(6))
+                return newID
+            }
+            break
+        }
+        return newID
     }
 }

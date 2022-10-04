@@ -32,7 +32,7 @@ final class CreateMember: XCTestCase {
 //            // Put the code you want to measure the time of here.
 //        }
 //    }
-    var system =  System()
+    var system =  System(day: 0)
 
     func test_CreateMember() {
         let john = try? Member(name: "Allan",

@@ -17,7 +17,7 @@ enum MemberParseError: Error {
 }
 
 struct Member: Identifiable, Equatable {
-    private(set) var id = UUID().uuidString.prefix(6)
+    private(set) var id: String
     private(set) var name: String
     private(set) var email: String
     private(set) var phoneNumber: String
@@ -28,6 +28,7 @@ struct Member: Identifiable, Equatable {
          email: String,
          mobilePhone: String,
          members: [Member]) throws {
+        self.id = Self.checkID(String(UUID().uuidString.prefix(6)), members)
         self.name = name
         self.email = try Self.checkEmail(email, members)
         self.phoneNumber = try Self.checkPhoneNumber(mobilePhone, members)
@@ -62,7 +63,7 @@ struct Member: Identifiable, Equatable {
 
 }
 
-extension Member {
+extension Member: TextTableRepresentable {
     private static func checkEmail (_ email: String, _ members: [Member]) throws -> String {
         guard !members.contains(where: {$0.email == email}) else {
             throw MemberParseError.usedEmail
@@ -79,9 +80,19 @@ extension Member {
         }
         return phoneNumber
     }
-}
 
-extension Member: TextTableRepresentable {
+    private static func checkID(_ id: String, _ members: [Member]) -> String {
+        var newID: String = id
+        while true {
+            guard !members.contains(where: {$0.id == id}) else {
+                newID = String(UUID().uuidString.prefix(6))
+                return newID
+            }
+            break
+        }
+        return newID
+    }
+
     static var columnHeaders: [String] {
         ["ID", "Name", "Email", "Phone Number", "Credits", "Owned Items"]
     }

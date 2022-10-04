@@ -46,7 +46,8 @@ struct ItemController {
             owner.newOwnedItems += 1
             let item = ItemView().createNewItem(creationDate: system.day,
                                                 category: category,
-                                                owner: owner)
+                                                owner: owner,
+                                                items: system.items)
             system.createItem(owner, item)
         } catch {
             throw MemberParseError.userDoesntExist

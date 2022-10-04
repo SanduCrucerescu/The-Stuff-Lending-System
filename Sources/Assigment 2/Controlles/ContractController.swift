@@ -13,24 +13,21 @@ struct ContractController {
         var startDay = ContractView().getStartDay()
         var endDay = ContractView().getEndDay()
         var run = true
-
+        //
         while run {
             do {
                 run = exitLoop(index)
-                
                 let startDayInt = try Contract().checkStartDay(system.day, startDay)
                 let endDayInt = try Contract().checkEndDay(startDayInt, endDay)
                 let free = system.checkItemFree(index, startDayInt, endDayInt)
                 run = false
-                
                 if free {
                     let lenteeEmail = ContractView().getRentee()
                     run = exitLoop(lenteeEmail)
-                    
                     let lendee = try system.getMember(lenteeEmail)
                     let cost = system.calculateCost(index, abs(startDayInt-endDayInt))
                     try system.checkMemberCredits(lendee, cost)
-                    
+                    //
                     let contract = Contract(lendee: lendee,
                                             startDay: startDayInt,
                                             endDay: endDayInt,
@@ -57,7 +54,7 @@ struct ContractController {
             } catch {}
         }
     }
-    
+    //
     func exitLoop(_ string: String) -> Bool {
         guard string != "q" else {
             return false

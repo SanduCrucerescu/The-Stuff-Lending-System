@@ -34,6 +34,8 @@ struct MainMenuView {
             return Actions.item
         } else if choice == "3" {
             return Actions.advanceDay
+        } else {
+            _ = mainMenu()
         }
         return Actions.quit
     }

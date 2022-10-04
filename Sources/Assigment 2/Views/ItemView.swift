@@ -48,11 +48,16 @@ struct ItemView {
             return Actions.deleteItem
         } else if choice == "5" {
             return Actions.createContract
+        } else {
+            _ = itemMenu()
         }
         return Actions.back
     }
 
     func getCategory() -> Item.Category {
+        for (index, category) in Item.Category.allCases.enumerated() {
+            print("\(index + 1). \(category)")
+        }
         print("Enter item category: ", terminator: "")
         let category = readLine() ?? ""
         if category == "1" {
@@ -73,7 +78,7 @@ struct ItemView {
 
     // MARK: - Get item Data
 
-    func createNewItem(creationDate: Int, category: Item.Category, owner: Member) -> Item {
+    func createNewItem(creationDate: Int, category: Item.Category, owner: Member, items: [Item]) -> Item {
         print("Enter item name: ", terminator: "")
         let name = readLine() ?? ""
         print("Enter item desctiption: ", terminator: "")
@@ -89,7 +94,8 @@ struct ItemView {
                                      description: description,
                                      creationDate: creationDate,
                                      category: category,
-                                     costPerDay: costPerDay)
+                                     costPerDay: costPerDay,
+                                     items: items)
                 status = false
                 return item
             } catch ItemParseError.costNotANumber {

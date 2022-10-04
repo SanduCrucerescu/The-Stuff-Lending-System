@@ -51,6 +51,8 @@ struct MemberView {
             return Actions.listMembers
         } else if choice == "12" {
             return Actions.verbose
+        } else {
+            _ = memberMenu()
         }
 
         return Actions.back

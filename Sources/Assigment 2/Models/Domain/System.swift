@@ -13,6 +13,31 @@ struct System {
     private(set) var members: [Member] = []
     private(set) var items: [Item] = []
 
+    init(day: Int) {
+        self.day = day
+        self.members = []
+        self.items = []
+        let allan = try? Member(name: "Allan",
+                              email: "allan@enigma.com",
+                              mobilePhone: "123456",
+                                members: self.members)
+        members.append(allan!)
+        let margaret = try? Member(name: "Margaret",
+                              email: "margaret@enigma.com",
+                              mobilePhone: "123457",
+                              members: members)
+        members.append(margaret!)
+
+        let lego = try? Item(owner: allan!,
+                             name: "Lego",
+                             description: "It's fun to play with",
+                             creationDate: day,
+                             category: Item.Category.toy,
+                             costPerDay: "50",
+                             items: items)
+        createItem(allan!, lego!)
+    }
+
     mutating func increaseDay() {
         day += 1
         for (index, item) in items.enumerated() {
