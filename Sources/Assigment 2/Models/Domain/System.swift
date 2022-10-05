@@ -133,6 +133,17 @@ struct System {
         return true
     }
 
+    func checkItemFree(_ itemID: String, _ startDay: Int, _ endDay: Int) -> Bool {
+        if let index = items.firstIndex(where: {$0.id == itemID}) {
+            for contract in items[index].contracts {
+                let contractRange = contract.startDay! ... contract.endDay!
+                let newContractRange = startDay ... endDay
+                return contractRange.overlaps(newContractRange) || contract.startDay == startDay ? false : true
+            }
+        }
+        return true
+    }
+
     mutating func changeItemName(_ itemID: String, _ newName: String) {
         if let itemIndex = items.firstIndex(where: {$0.id == itemID}) {
             items[itemIndex].newName = newName
@@ -158,11 +169,13 @@ struct System {
             }
             items[itemIndex].newCostPerDay = Int(newItemCostPerDay) ?? 0
         }
-
     }
 
-    mutating func removeItem(_ itemID: String) {
+    mutating func removeItem(_ itemID: String) throws {
         if let itemIndex = items.firstIndex(where: {$0.id == itemID}) {
+            guard items[itemIndex].isAvalible else {
+                throw ItemParseError.itemHasAnActiveContract
+            }
             items.remove(at: itemIndex)
         }
     }
@@ -176,19 +189,10 @@ struct System {
 
     // MARK: - Contract functions
 
-    func checkItemFree(_ itemID: String, _ startDay: Int, _ endDay: Int) -> Bool {
-        if let index = items.firstIndex(where: {$0.id == itemID}) {
-            for contract in items[index].contracts {
-                let contractRange = contract.startDay! ... contract.endDay!
-                let newContractRange = startDay ... endDay
-                return contractRange.overlaps(newContractRange) || contract.startDay == startDay ? false : true
-            }
-        }
-        return true
-    }
-
     mutating func createContract(_ itemID: String, _ contract: Contract) {
+        let lendeeIndex = members.firstIndex(where: {$0.id == contract.lendee?.id})
         if let index = items.firstIndex(where: {$0.id == itemID}) {
+            members[lendeeIndex!].newCredits -= contract.cost!
             items[index].addContract(contract)
         }
     }

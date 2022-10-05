@@ -28,7 +28,7 @@ struct ContractView {
     }
 
     func getRentee() -> String {
-        print("Enter rentee email | q - exit: ", terminator: "")
+        print("Enter lendee ID | q - exit: ", terminator: "")
         let email = readLine() ?? ""
         return email
     }

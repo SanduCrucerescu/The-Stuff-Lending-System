@@ -11,6 +11,7 @@ import SwiftyTextTable
 enum ItemParseError: Error {
     case itemDosentExists
     case costNotANumber
+    case itemHasAnActiveContract
 }
 
 struct Item: Identifiable, Equatable {

@@ -76,7 +76,7 @@ struct ItemController {
 
     func checkItemTemplate(system: inout System, function: (String, inout System) throws -> Void, itemID: String?=nil) {
         var run = true
-        var itemID = itemID ?? ItemView().getItemID()
+        var itemID = ItemView().listItems(system.items)
 
         while run {
             do {
@@ -90,13 +90,19 @@ struct ItemController {
             } catch ItemParseError.itemDosentExists {
                 itemID = ItemView().getItemID()
                 run = true
-            } catch {
-            }
+            } catch ItemParseError.itemHasAnActiveContract {
+                ItemView().itemIsLended()
+                run = false
+            } catch {}
         }
     }
 
     func removeItem(_ itemID: String, _ system: inout System) throws {
-        system.removeItem(itemID)
+        do {
+            try system.removeItem(itemID)
+        } catch {
+            throw ItemParseError.itemHasAnActiveContract
+        }
     }
 
     func changeCostPerDay(_ itemID: String, _ system: inout System) {

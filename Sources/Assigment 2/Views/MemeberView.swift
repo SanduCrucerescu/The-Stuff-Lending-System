@@ -159,11 +159,13 @@ struct MemberView {
 
     func listMembers(_ members: [Member] ) {
         print(members.renderTextTable())
+        print("Press any key to continue:", terminator: "")
         _ = readLine()
     }
 
     func listMember(_ member: [Member]) {
         print(member.renderTextTable())
+        print("Press any key to continue:", terminator: "")
         _ = readLine()
     }
 

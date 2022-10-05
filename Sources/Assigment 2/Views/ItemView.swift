@@ -139,10 +139,18 @@ struct ItemView {
 
     // MARK: - Items actions
 
+    func itemIsLended() {
+        print("Item has an actve contract! Try agin after.")
+        print("Press any key to continue:", terminator: "")
+        _ = readLine()
+
+    }
+
     func listItem(_ item: [Item]) {
         let contracts = item[0].contracts
         print(item.renderTextTable())
         print(contracts.renderTextTable())
+        print("Press any key to continue:", terminator: "")
         _ = readLine()
     }
 
