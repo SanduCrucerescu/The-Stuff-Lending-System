@@ -8,13 +8,14 @@
 import Foundation
 import SwiftyTextTable
 
-struct System {
+struct System: MemberFunctions, ItemFunctions, ContractFunctions, SaveData {
     private(set) var day: Int = 0
     private(set) var members: [Member] = []
     private(set) var items: [Item] = []
 
     init(day: Int) {
         self.day = day
+        // add let (members, items) = loadDataFromCSV
         self.members = []
         self.items = []
         let allan = try? Member(name: "Allan",
@@ -49,6 +50,16 @@ struct System {
                 }
             }
         }
+    }
+
+    // MARK: - Data manipulation functions
+
+    func loadDataFromCSV() {
+
+    }
+
+    func saveDataToCSV() {
+
     }
 
     // MARK: - Member functions

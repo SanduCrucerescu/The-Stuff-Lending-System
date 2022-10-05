@@ -27,6 +27,7 @@ struct MainMenuView {
         print("\u{001B}[2J")
 
         if choice == "q" || choice == "Q" {
+            // add system.saveToCSV()
             return Actions.quit
         } else if choice == "1" {
             return Actions.member

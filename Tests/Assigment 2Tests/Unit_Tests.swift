@@ -118,7 +118,7 @@ final class UnitTests: XCTestCase {
         XCTAssertEqual(exists, true)
     }
 
-    func test_checkContractDay() {
+    func test_checkContractFree() {
         let contract = Contract(id: UUID().uuidString,
                                 lendee: self.system.members[1],
                                 startDay: 5,
@@ -135,5 +135,136 @@ final class UnitTests: XCTestCase {
 
         XCTAssertEqual(exists, false)
 
+    }
+
+    func test_CreateItem() {
+        let car =   try? Item(owner: self.system.members[0],
+                                  name: "Car",
+                                  description: "It's fun to play with",
+                                  creationDate: self.system.day,
+                                  category: Item.Category.toy,
+                                  costPerDay: "50",
+                                  items: self.system.items)
+
+        self.system.createItem(self.system.members[0], car!)
+
+        let credits = self.system.members[0].credits
+
+        XCTAssertEqual(credits, 200)
+
+    }
+
+    func test_DeleteItem() {
+        let id = self.system.items[0].id
+        let item = self.system.items[0]
+
+        do {
+            try self.system.removeItem(id)
+            let exists = self.system.items.contains(where: {$0.id == id})
+            XCTAssertEqual(item.isAvalible, true)
+            XCTAssertEqual(exists, false)
+        } catch ItemParseError.itemHasAnActiveContract {
+            XCTAssertEqual(item.isAvalible, false)
+        } catch {}
+    }
+
+    func test_CreateContract() {
+        let itemID = self.system.items[0].id
+        let member = self.system.members[1]
+
+        let contract = Contract(id: UUID().uuidString,
+                                lendee: member,
+                                startDay: 1,
+                                endDay: 3,
+                                cost: 20)
+        self.system.createContract(itemID, contract)
+
+        let exists = self.system.items.first(where: {$0.id == itemID})?
+            .contracts.contains(where: {$0.id == contract.id})
+
+        XCTAssertEqual(exists, true)
+    }
+
+    func test_CreateContract2() {
+        let car =   try? Item(owner: self.system.members[0],
+                                  name: "Car",
+                                  description: "It's fun to play with",
+                                  creationDate: self.system.day,
+                                  category: Item.Category.toy,
+                                  costPerDay: "100",
+                                  items: self.system.items)
+
+        self.system.createItem(self.system.members[0], car!)
+
+        let itemID = self.system.items[1].id
+        let member = self.system.members.last
+        var exists = false
+        do {
+            let startDay = "1"
+            let endDay = "4"
+            let startDayInt = try Contract().checkStartDay(system.day, startDay)
+            let endDayInt = try Contract().checkEndDay(startDayInt, endDay)
+            let free = system.checkItemFree(itemID, startDayInt, endDayInt)
+            let cost = system.calculateCost(itemID, abs(startDayInt-endDayInt))
+            try system.checkMemberCredits(member!, cost)
+
+            let contract = Contract(id: UUID().uuidString,
+                                    lendee: member,
+                                    startDay: startDayInt,
+                                    endDay: endDayInt,
+                                    cost: cost)
+
+            self.system.createContract(itemID, contract)
+
+            exists = ((self.system.items.first(where: {$0.id == itemID})?
+                .contracts.contains(where: {$0.id == contract.id})) != nil)
+
+            XCTAssertEqual(exists, true)
+        } catch {
+            XCTAssertEqual(exists, false)
+        }
+    }
+
+    func test_CreateContract3() {
+        let itemID = self.system.items[0].id
+        let member = self.system.members.last
+        var exists = false
+        do {
+            let startDay = "2"
+            let endDay = "6"
+            let startDayInt = try Contract().checkStartDay(system.day, startDay)
+            let endDayInt = try Contract().checkEndDay(startDayInt, endDay)
+            let free = system.checkItemFree(itemID, startDayInt, endDayInt)
+            let cost = system.calculateCost(itemID, abs(startDayInt-endDayInt))
+            try system.checkMemberCredits(member!, cost)
+            if free {
+                let contract = Contract(id: UUID().uuidString,
+                                        lendee: member,
+                                        startDay: startDayInt,
+                                        endDay: endDayInt,
+                                        cost: cost)
+
+                self.system.createContract(itemID, contract)
+
+                exists = ((self.system.items.first(where: {$0.id == itemID})?
+                    .contracts.contains(where: {$0.id == contract.id})) != nil)
+
+                XCTAssertEqual(exists, true)
+            } else {
+                XCTAssertEqual(exists, false)
+            }
+        } catch {
+            XCTAssertEqual(exists, false)
+        }
+    }
+
+    func test_AdvanceTime() {
+        for _ in 0...8 {
+            self.system.increaseDay()
+        }
+
+        let free = self.system.items[0].isAvalible
+
+        XCTAssertEqual(free, true)
     }
 }
