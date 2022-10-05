@@ -35,7 +35,7 @@ struct Item: Identifiable, Equatable {
     private(set) var description: String
     private(set) var creationDate: Int
     private(set) var category: Category
-    private(set) var costPerDay: Int
+    private(set) var costPerDay: Float
     private(set) var isAvalible: Bool = true
     private(set) var contracts: [Contract]
 
@@ -71,7 +71,7 @@ struct Item: Identifiable, Equatable {
         set { category = newValue }
     }
 
-    var newCostPerDay: Int {
+    var newCostPerDay: Float {
         get { return costPerDay }
         set { costPerDay = newValue}
     }
@@ -99,11 +99,11 @@ extension Item: TextTableRepresentable {
         return "Items in store"
     }
 
-    private static func checkCost (_ costPerDay: String) throws -> Int {
-        guard costPerDay.isNumber else {
+    private static func checkCost (_ costPerDay: String) throws -> Float {
+        guard costPerDay.isNumber || (costPerDay.double != nil) else {
             throw ItemParseError.costNotANumber
         }
-        return Int(costPerDay) ?? 0
+        return Float(costPerDay) ?? 0
     }
 
     private static func checkID(_ id: String, _ items: [Item]) -> String {

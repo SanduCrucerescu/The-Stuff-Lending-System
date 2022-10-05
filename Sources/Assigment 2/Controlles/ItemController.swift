@@ -23,10 +23,9 @@ struct ItemController {
                 checkItemTemplate(system: &system,
                                   function: doChangeItem)
             case .listItem:
-                let itemID = ItemView().listItems(system.items)
+
                 checkItemTemplate(system: &system,
-                                  function: printItem,
-                                  itemID: itemID)
+                                  function: printItem)
             case .deleteItem:
                 checkItemTemplate(system: &system,
                                   function: removeItem)
@@ -43,7 +42,6 @@ struct ItemController {
         do {
             var owner = try system.getMember(email)
             let category = ItemView().getCategory()
-            owner.newOwnedItems += 1
             let item = ItemView().createNewItem(creationDate: system.day,
                                                 category: category,
                                                 owner: owner,

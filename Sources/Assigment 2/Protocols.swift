@@ -20,7 +20,7 @@ protocol MemberFunctions {
     mutating func changeName(_ memberID: String, _ newName: String)
     mutating func changeEmail(_ memberID: String, _ newEmail: String)
     mutating func changePhoneNumber(_ memberID: String, _ newPhoneNumber: String)
-    func checkMemberCredits(_ member: Member, _ credits: Int) throws
+    func checkMemberCredits(_ member: Member, _ credits: Float) throws
 }
 
 protocol ItemFunctions {
@@ -33,7 +33,7 @@ protocol ItemFunctions {
     mutating func chanageItemCategory(_ itemID: String, _ newCategory: Item.Category)
     mutating func changeItemCostPerDay(_ itemID: String, _ newItemCostPerDay: String) throws
     mutating func removeItem(_ itemID: String) throws
-    func calculateCost(_ itemID: String, _ days: Int) -> Int
+    func calculateCost(_ itemID: String, _ days: Int) -> Float
 }
 
 protocol ContractFunctions {

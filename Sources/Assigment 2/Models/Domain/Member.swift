@@ -22,7 +22,7 @@ struct Member: Identifiable, Equatable {
     private(set) var email: String
     private(set) var phoneNumber: String
     private(set) var ownedItems: Int
-    private(set) var credits: Int
+    private(set) var credits: Float
 
     init(name: String,
          email: String,
@@ -51,7 +51,7 @@ struct Member: Identifiable, Equatable {
         set { phoneNumber = newValue }
     }
 
-    var newCredits: Int {
+    var newCredits: Float {
         get { return credits }
         set { credits = newValue }
     }

@@ -27,7 +27,7 @@ struct MemberView {
     }
 
     func memberMenu() -> Actions {
-        print("1 - Add new member")
+        print("\n1 - Add new member")
         print("2 - Remove member")
         print("3 - Change a member's information")
         print("4 - Look at a specific members full information")

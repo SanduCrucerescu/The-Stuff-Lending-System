@@ -107,7 +107,7 @@ struct System: MemberFunctions, ItemFunctions, ContractFunctions, SaveData {
         }
     }
 
-    func checkMemberCredits(_ member: Member, _ credits: Int) throws {
+    func checkMemberCredits(_ member: Member, _ credits: Float) throws {
         guard !(member.newCredits < credits) else {
             throw MemberParseError.notEnoughtCredits
         }
@@ -178,7 +178,7 @@ struct System: MemberFunctions, ItemFunctions, ContractFunctions, SaveData {
             guard newItemCostPerDay.isNumber else {
                 throw ItemParseError.costNotANumber
             }
-            items[itemIndex].newCostPerDay = Int(newItemCostPerDay) ?? 0
+            items[itemIndex].newCostPerDay = Float(newItemCostPerDay) ?? 0
         }
     }
 
@@ -191,9 +191,9 @@ struct System: MemberFunctions, ItemFunctions, ContractFunctions, SaveData {
         }
     }
 
-    func calculateCost(_ itemID: String, _ days: Int) -> Int {
+    func calculateCost(_ itemID: String, _ days: Int) -> Float {
         if let index = items.firstIndex(where: {$0.id == itemID}) {
-            return items[index].costPerDay * days
+            return items[index].costPerDay * Float(days)
         }
         return 0
     }

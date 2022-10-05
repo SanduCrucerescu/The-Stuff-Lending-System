@@ -33,12 +33,13 @@ struct ContractController {
                                             endDay: endDayInt,
                                             cost: cost)
                     system.createContract(index, contract)
+                    run = false
                 }
             } catch MemberParseError.notEnoughtCredits {
                 ContractView().notEnoughtCredits()
                 run = false
             } catch MemberParseError.userDoesntExist {
-                run = true
+
             } catch ContractParseError.invalidEndDay {
                 endDay = ContractView().invalidEndDay("inserted value can't be before start day")
                 run = false

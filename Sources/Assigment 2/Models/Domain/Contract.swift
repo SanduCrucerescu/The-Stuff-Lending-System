@@ -20,7 +20,7 @@ struct Contract: Identifiable {
     private(set) var lendee: Member?
     private(set) var startDay: Int?
     private(set) var endDay: Int?
-    private(set) var cost: Int?
+    private(set) var cost: Float?
 
     func checkStartDay(_ day: Int, _ startDay: String) throws -> Int {
         guard startDay.isNumber else {

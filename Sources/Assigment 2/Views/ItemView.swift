@@ -27,7 +27,7 @@ struct ItemView {
     }
 
     func itemMenu() -> Actions {
-        print("1 - Create Item for member")
+        print("\n1 - Create Item for member")
         print("2 - Change item information")
         print("3 - List Item")
         print("4 - Delete Item")
