@@ -27,6 +27,7 @@ struct MemberView {
     }
 
     func memberMenu() -> Actions {
+        print("\n    Member Menu   ")
         print("\n1 - Add new member")
         print("2 - Remove member")
         print("3 - Change a member's information")
@@ -49,7 +50,7 @@ struct MemberView {
             return Actions.listMember
         } else if choice == "5" {
             return Actions.listMembers
-        } else if choice == "12" {
+        } else if choice == "6" {
             return Actions.verbose
         } else {
             _ = memberMenu()
@@ -174,11 +175,12 @@ struct MemberView {
             print("\nName: \(member.name)")
             print("Email: \(member.email)")
             print("Items: ")
-            for item in items where item.owner.id == member.id {
-                print("\t\nName: \(item.name)")
-                print("\tDescription: \(item.description)")
-                print("\tCategory: \(item.category)")
-                print("\tCost per day: \(item.costPerDay)")
+            for (index, item) in items.enumerated() where item.owner.id == member.id {
+                print("\tItem \(index + 1):")
+                print("\t\tName: \(item.name)")
+                print("\t\tDescription: \(item.description)")
+                print("\t\tCategory: \(item.category)")
+                print("\t\tCost per day: \(item.costPerDay)")
                 for contract in item.contracts {
                     let dayRange = contract.startDay!...contract.endDay!
                     if dayRange.contains(day) {

@@ -49,4 +49,8 @@ struct ContractView {
         print("Lendee doesn't have enought credits, press any key to exit", terminator: "")
         _ = readLine()
     }
+
+    func contractCreated() {
+        print("Cantract has been created successfully")
+    }
 }

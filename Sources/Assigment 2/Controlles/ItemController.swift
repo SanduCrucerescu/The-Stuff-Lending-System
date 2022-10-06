@@ -40,7 +40,7 @@ struct ItemController {
 
     func createItem(system: inout System, email: String) throws {
         do {
-            var owner = try system.getMember(email)
+            let owner = try system.getMember(email)
             let category = ItemView().getCategory()
             let item = ItemView().createNewItem(creationDate: system.day,
                                                 category: category,

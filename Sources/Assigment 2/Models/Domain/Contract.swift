@@ -23,7 +23,7 @@ struct Contract: Identifiable {
     private(set) var cost: Float?
 
     func checkStartDay(_ day: Int, _ startDay: String) throws -> Int {
-        guard startDay.isNumber else {
+        guard startDay.isNumber || (startDay.double == nil) else {
             throw ContractParseError.startDayNotANumber
         }
         guard day <= Int(startDay)! else {
@@ -33,7 +33,7 @@ struct Contract: Identifiable {
     }
 
     func checkEndDay(_ startDay: Int, _ endDay: String) throws -> Int {
-        guard endDay.isNumber else {
+        guard endDay.isNumber || (endDay.double == nil) else {
             throw ContractParseError.endDayNotANumber
         }
 

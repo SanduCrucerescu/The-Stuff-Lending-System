@@ -193,7 +193,7 @@ struct System: MemberFunctions, ItemFunctions, ContractFunctions, SaveData {
 
     func calculateCost(_ itemID: String, _ days: Int) -> Float {
         if let index = items.firstIndex(where: {$0.id == itemID}) {
-            return items[index].costPerDay * Float(days)
+            return items[index].costPerDay * Float(days + 1)
         }
         return 0
     }
