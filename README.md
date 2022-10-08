@@ -1,3 +1,5 @@
+##### Created by: Sandu Crucerescu (sc222tf@student.lnu.se)
+
 # Setup
 
 To be able to run this, you are going to have docker installed.
@@ -57,3 +59,7 @@ Note: Everytime you select a function in the menu you also have to press return(
 
 The system implements everything necessary for grade 2, in my intense testing I tried to value check so that the program won't crash, if the wrong data is inputed it will either return to the previous menu or will ask thhe user for another inout or to quit this function.
 In some cases for example if you create an item or a new member and you don't input anything and press enter it will still continue with the empty string. Besides that the program doesn't crash and implements every function from the Functional Requirements
+
+# External Libraries
+
+1. SwiftyTextTable - this package awas used to print the nice tables <br>- source: https://github.com/scottrhoyt/SwiftyTextTable
